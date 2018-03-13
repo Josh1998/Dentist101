@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 import seatReservationSystem.Seat;
-master
+
 public class Dentist {
 	
 	 static final String INFORMATION = "M://metadata//dentist.txt";
