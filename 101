@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-import seatReservationSystem.Seat;
-
 public class Dentist {
 	
 	 static final String INFORMATION = "M://metadata//dentist.txt";
@@ -134,13 +132,97 @@ public class Dentist {
 		}
 		
 		private static void adminMenu() {
-			System.out.println("worked");
+		
+			final Scanner A = new Scanner(System.in);
+			
+			String choice = "";
+			
+			do {
+				System.out.println("1 - Add/remove dentist");
+				System.out.println("2 - Add/remove patient");
+				System.out.println("3 - Add/change first choice dentist");
+				System.out.println("4 - Alter working days");
+				System.out.println("5 - List upcoming appointments");
+				System.out.println("6 - List previous visits made");
+				System.out.println("7 - List treatments made");
+				System.out.println("Q - Quit");
+				System.out.print("Pick : ");
+
+				choice = A.next().toUpperCase();
+
+				switch (choice) {
+					case "1" : {
+						Add/removeDentist();
+						break;
+					}
+					case "2" : {
+						Add/removePatient();
+						break;
+					}
+					case "3" : {
+						Add/removeFirstChoice();
+						break;
+					}
+					case "4" : {
+						AlterDays();
+						break;
+					}
+					case "5" : {
+						ListAppointments();
+						break;
+					}
+					case "6" : {
+						ListPreviousVisits();
+						break;
+					}
+					case "7" : {
+						ListTreatments();
+						break;
+					}
+				}
+			} while (!choice.equals("Q"));
 			
 		}
+		
 		private static void patientsMenu() {
 		
 			
 		}
 		private static void dentistMenu() {
-}
+		final Scanner D = new Scanner(System.in);
+			
+			String choice = "";
+			
+			do {
+				System.out.println("1 - Add/change personal details");
+				System.out.println("2 - View calendar");
+				System.out.println("3 - List previous appointments");
+				System.out.println("4 - Add treatment to a patient");
+				System.out.println("Q - Quit");
+				System.out.print("Pick : ");
+
+				choice = D.next().toUpperCase();
+
+				switch (choice) {
+					case "1" : {
+						Add/removeDetailsDentist();
+						break;
+					}
+					case "2" : {
+						viewCalendar();
+						break;
+					}
+					case "3" : {
+						listPreviousAppointments();
+						break;
+					}
+					case "4" : {
+						addTreatmentToPatient();
+						break;
+					}
+
+				}
+			} while (!choice.equals("Q"));
+			
+		}
 }
