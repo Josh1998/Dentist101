@@ -1,228 +1,378 @@
 import java.util.Scanner;
 
-public class Dentist {
+public class DentistPractice {
 	
-	 static final String INFORMATION = "M://metadata//dentist.txt";
-	 static final Scanner D = new Scanner(System.in);	
-	
-		public static void main(String[] args) throws Exception {
-			//loadData();
+	 static final Scanner Menu = new Scanner(System.in);	
 
-			String choice = "";
+	public static void main(String[] args) throws Exception {
+		//loadData();
 
-			System.out.println("-- Welcome to the Dentists --");
+		String choice = "";
+
+		System.out.println("-- Welcome to the Dentists --");
 
 
-			System.out.println();
+		System.out.println();
 
-			do {
-				System.out.println("1 - Admin");
-				System.out.println("2 - Dentist");
-				System.out.println("3 - Patient");
-				System.out.println("Q - Quit");
-				System.out.print("Pick : ");
+		do {
+			System.out.println("1 - Admin");
+			System.out.println("2 - Dentist");
+			System.out.println("3 - Patient");
+			System.out.println("Q - Quit");
+			System.out.print("Pick : ");
 
-				choice = D.next().toUpperCase();
+			choice = Menu.next().toUpperCase();
 
-				switch (choice) {
-					case "1" : {
-						Admin();
-						break;
-					}
-					case "2" : {
-						Dentist();
-						break;
-					}
-					case "3" : {
-						Patients();
-						break;
-					}
-					case "4" : {
-
-						break;
-					}
+			switch (choice) {
+				case "1" : {
+					Admin();
+					break;
 				}
-			} while (!choice.equals("Q"));
+				case "2" : {
+					Dentist();
+					break;
+				}
+				case "3" : {
+					Patient();
+					break;
+				}
+				case "4" : {
 
+					break;
+				}
+			}
+		} while (!choice.equals("Q"));
+
+}
+
+	private static void Patient() {
+		Scanner patients = new Scanner(System.in);
+		
+		for(int i=0; i<3; i++) {
+		
+			System.out.println("Please input username");
+			String usernameP = patients.next();
+			System.out.println("Please input password");
+			String passwordP = patients.next();
+			
+			if (usernameP.equals("Patient")&&passwordP.equals("password")) {
+				patientSubMenu();
+				
+			}
+			else { System.out.println("Your username or password is incorrect, please try again");
+			
+			}
+			System.out.println("Tries exceeded, Returning to menu.");
+		
+	}}
+	
+	private static void Dentist() {
+		Scanner dentist = new Scanner(System.in);
+		
+		for(int i=0; i<3; i++) {
+		
+			System.out.println("Please input Name");
+			String usernameD = dentist.next();
+			System.out.println("Please input password");
+			String passwordD = dentist.next();
+			
+			if (usernameD.equals("Dentist")&&passwordD.equals("password")) {
+				dentistSubMenu();
+				
+			}
+			else { System.out.println("Your username or password is incorrect, please try again");
+			
+			}
+			System.out.println("Tries exceeded, Returning to menu.");
+		}}
+	
+	private static void Admin() {
+		Scanner admin = new Scanner(System.in);
+		
+		for(int i=0; i<3; i++) {
+		
+			System.out.println("Please input username");
+			String usernameA = admin.next();
+			System.out.println("Please input password");
+			String passwordA = admin.next();
+			
+			if (usernameA.equals("Admin")&&passwordA.equals("password")) {
+				adminSubMenu();
+				break;
+				
+			}
+			else { System.out.println("Your username or password is incorrect, please try again");
+			
+			}
+		}
+			System.out.println("Tries exceeded, Returning to menu.");
+			
+		
+	}
+	
+	
+	private static void patientSubMenu() {
+		
+		 final Scanner P = new Scanner(System.in);
+		 
+		 String patientChoice = "";
+	
+		do {
+			System.out.println("1 - Add/change your personal details");
+			System.out.println("2 - Previous visits to the practice");
+			System.out.println("3 - Previous treatments received");
+			System.out.println("4 - Request an appointment");
+			System.out.println("5 - Do you allow your practice admin to view your treatment list (Y/N)");
+			System.out.println("Q - Quit");
+			System.out.print("Pick : ");
+
+			patientChoice = P.next().toUpperCase();
+
+			switch (patientChoice) {
+				case "1" : {
+					PersonalDetails();
+					break;
+				}
+				case "2" : {
+					PreviousVists();
+					break;
+				}
+				case "3" : {
+					PreviousTreatments();
+					break;
+				}
+				case "4" : {
+					RequestAppointment();
+					break;
+				}
+				case "5" : {
+					Privacy();
+					break;
+				}
+				case "6" : {
+
+					break;
+				}
+			}
+		} while (!patientChoice.equals("Q"));
+
+		
+		
+	}
+	
+	private static void dentistSubMenu() {
+		final Scanner D = new Scanner(System.in);
+		
+		String choice = "";
+		
+		do {
+			System.out.println("1 - Add/change personal details");
+			System.out.println("2 - View calendar");
+			System.out.println("3 - List previous appointments");
+			System.out.println("4 - Add treatment to a patient");
+			System.out.println("Q - Quit");
+			System.out.print("Pick : ");
+
+			choice = D.next().toUpperCase();
+
+			switch (choice) {
+				case "1" : {
+					AddremoveDetailsDentist();
+					break;
+				}
+				case "2" : {
+					viewCalendar();
+					break;
+				}
+				case "3" : {
+					listPreviousAppointments();
+					break;
+				}
+				case "4" : {
+					addTreatmentToPatient();
+					break;
+				}
+
+			}
+		} while (!choice.equals("Q"));
+		
+	}
+	
+	
+
+	private static void AddremoveDetailsDentist() {
+		// TODO Auto-generated method stub
+		
 	}
 
-		private static void loadData() {
-			
-			while (INFORMATION.hasNext()) {
-				String dentistFirstName = INFORMATION.next();
-				String dentistLastName = INFORMATION.next();
-				String dentistPasscode = INFORMATION.next();
-				
-				
-				
-				
-				//seats[index] = new Seat(seatName, seatClass, isWindow, isAisle, isTable, seatPrice, eMail);
-				//index++;
-			}
-			
-		}
+	private static void adminSubMenu() {
 
-		private static void Patients() {
-			Scanner patients = new Scanner(System.in);
-			
-			for(int i=0; i<3; i++) {
-			
-				System.out.println("Please input username");
-				String usernameP = patients.next();
-				System.out.println("Please input password");
-				String passwordP = patients.next();
-				
-				if (usernameP.equals("Patient")&&passwordP.equals("password")) {
-					patientsMenu();
-					
+		final Scanner A = new Scanner(System.in);
+		
+		String choice = "";
+		
+		do {
+			System.out.println("1 - Add/remove dentist");
+			System.out.println("2 - Add/remove patient");
+			System.out.println("3 - Add/change first choice dentist");
+			System.out.println("4 - Alter working days");
+			System.out.println("5 - List upcoming appointments");
+			System.out.println("6 - List previous visits made");
+			System.out.println("7 - List treatments made");
+			System.out.println("Q - Quit");
+			System.out.print("Pick : ");
+
+			choice = A.next().toUpperCase();
+
+			switch (choice) {
+				case "1" : {
+					AddremoveDentist();
+					break;
 				}
-				else { System.out.println("Your username or password is incorrect, please try again");
-				
+				case "2" : {
+					AddremovePatient();
+					break;
 				}
-				System.out.println("Tries exceeded, Returning to menu.");
-			
-		}}
+				case "3" : {
+					AddremoveFirstChoice();
+					break;
+				}
+				case "4" : {
+					AlterDays();
+					break;
+				}
+				case "5" : {
+					ListAppointments();
+					break;
+				}
+				case "6" : {
+					ListPreviousVisits();
+					break;
+				}
+				case "7" : {
+					ListTreatments();
+					break;
+				}
+			}
+		} while (!choice.equals("Q"));
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+	
+
+	
+
+	
+
+	
+	
 
 	
 		
+	
 
-		private static void Dentist() {
-			Scanner dentist = new Scanner(System.in);
-			
-			for(int i=0; i<3; i++) {
-			
-				System.out.println("Please input Name");
-				String usernameD = dentist.next();
-				System.out.println("Please input password");
-				String passwordD = dentist.next();
-				
-				if (usernameD.equals("Dentist")&&passwordD.equals("password")) {
-					dentistMenu();
-					
-				}
-				else { System.out.println("Your username or password is incorrect, please try again");
-				
-				}
-				System.out.println("Tries exceeded, Returning to menu.");
-			
-		}}
+
+
+	private static void AddremovePatient() {
+		// TODO Auto-generated method stub
 		
-		private static void Admin() {
-			Scanner admin = new Scanner(System.in);
-			
-			for(int i=0; i<3; i++) {
-			
-				System.out.println("Please input username");
-				String usernameA = admin.next();
-				System.out.println("Please input password");
-				String passwordA = admin.next();
-				
-				if (usernameA.equals("Admin")&&passwordA.equals("password")) {
-					adminMenu();
-					break;
-					
-				}
-				else { System.out.println("Your username or password is incorrect, please try again");
-				
-				}
-			}
-				System.out.println("Tries exceeded, Returning to menu.");
-				
-			
-		}
+	}
+
+	private static void AddremoveFirstChoice() {
+		// TODO Auto-generated method stub
 		
-		private static void adminMenu() {
+	}
+
+	private static void AlterDays() {
+		// TODO Auto-generated method stub
 		
-			final Scanner A = new Scanner(System.in);
-			
-			String choice = "";
-			
-			do {
-				System.out.println("1 - Add/remove dentist");
-				System.out.println("2 - Add/remove patient");
-				System.out.println("3 - Add/change first choice dentist");
-				System.out.println("4 - Alter working days");
-				System.out.println("5 - List upcoming appointments");
-				System.out.println("6 - List previous visits made");
-				System.out.println("7 - List treatments made");
-				System.out.println("Q - Quit");
-				System.out.print("Pick : ");
+	}
 
-				choice = A.next().toUpperCase();
-
-				switch (choice) {
-					case "1" : {
-						Add/removeDentist();
-						break;
-					}
-					case "2" : {
-						Add/removePatient();
-						break;
-					}
-					case "3" : {
-						Add/removeFirstChoice();
-						break;
-					}
-					case "4" : {
-						AlterDays();
-						break;
-					}
-					case "5" : {
-						ListAppointments();
-						break;
-					}
-					case "6" : {
-						ListPreviousVisits();
-						break;
-					}
-					case "7" : {
-						ListTreatments();
-						break;
-					}
-				}
-			} while (!choice.equals("Q"));
-			
-		}
+	private static void ListAppointments() {
+		// TODO Auto-generated method stub
 		
-		private static void patientsMenu() {
+	}
+
+	private static void ListPreviousVisits() {
+		// TODO Auto-generated method stub
 		
-			
-		}
-		private static void dentistMenu() {
-		final Scanner D = new Scanner(System.in);
-			
-			String choice = "";
-			
-			do {
-				System.out.println("1 - Add/change personal details");
-				System.out.println("2 - View calendar");
-				System.out.println("3 - List previous appointments");
-				System.out.println("4 - Add treatment to a patient");
-				System.out.println("Q - Quit");
-				System.out.print("Pick : ");
+	}
 
-				choice = D.next().toUpperCase();
+	private static void ListTreatments() {
+		// TODO Auto-generated method stub
+		
+	}
 
-				switch (choice) {
-					case "1" : {
-						Add/removeDetailsDentist();
-						break;
-					}
-					case "2" : {
-						viewCalendar();
-						break;
-					}
-					case "3" : {
-						listPreviousAppointments();
-						break;
-					}
-					case "4" : {
-						addTreatmentToPatient();
-						break;
-					}
+	private static void AddremoveDentist() {
+		// TODO Auto-generated method stub
+		
+	}
 
-				}
-			} while (!choice.equals("Q"));
-			
-		}
-}
+	private static void viewCalendar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void listPreviousAppointments() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void addTreatmentToPatient() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private static void PersonalDetails() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void PreviousVists() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void PreviousTreatments() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void RequestAppointment() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void Privacy() {
+		// TODO Auto-generated method stub
+		
+	}}
+
