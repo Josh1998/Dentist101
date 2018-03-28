@@ -311,6 +311,7 @@ public class DentistPractice {
 
 	public static void AddremovePatient() throws FileNotFoundException {
 		
+		final Scanner answer = new Scanner(System.in);
 		Scanner PatientDetails = new Scanner(new FileReader("C:\\Dentist\\PatientDetails.txt"));
 		final PatientDetailsA[] PatientDetailsArray = new PatientDetailsA[5];
 		
@@ -329,6 +330,62 @@ public class DentistPractice {
 			amount++;
 			
 		}
+		
+		String addPatient = "0";
+		String addFirstName = "free";
+		String addLastName = "free";
+		String addPassword = "free";
+		String addAddress = "free";
+		
+		System.out.println("Would you like to add or remove a patient?");
+		System.out.println("1 - Add");
+		System.out.println("2 - Remove");
+		
+		addPatient = answer.next().toUpperCase();
+		
+		if (addPatient.equals("1")) {
+			
+			String empty = "free";
+			
+			System.out.println("Please remember to use the '_' instead of spaces, thank you.");
+			System.out.println(" ");
+			
+			System.out.println("Please enter first name:");
+			addFirstName = answer.next();
+			
+			System.out.println("Please enter last name:");
+			addLastName = answer.next();
+			
+			System.out.println("Please enter new password name:");
+			addPassword = answer.next();
+			
+			System.out.println("Please enter address:");
+			addAddress = answer.next();
+			
+			for (int i = 0; i<PatientDetailsArray.length; i++)
+			{
+			
+				if ((PatientDetailsArray[i].getFirstName().equals(empty))&&(PatientDetailsArray[i].getLastName().equals(empty))&&(PatientDetailsArray[i].getPassword().equals(empty))&&(PatientDetailsArray[i].getAddress().equals(empty))&&(PatientDetailsArray[i].getFirstDentist().equals(empty)))
+				{
+					// System.out.println(PatientDetailsArray[i].toString());
+					PatientDetailsArray[i].addFirstName(addFirstName);
+					PatientDetailsArray[i].addLastName(addLastName);
+					PatientDetailsArray[i].addPassword(addPassword);
+					PatientDetailsArray[i].addAddress(addAddress);
+					
+					break;
+				}
+			
+			}
+			
+			
+			
+		}
+		
+		
+		else {
+		
+		
 		
 		System.out.println("Please enter you first name:");
 		String firstNameRemove = input.nextLine();
@@ -353,6 +410,7 @@ public class DentistPractice {
 				PatientDetailsArray[i].removeFirstDentist(remove);
 				break;
 			}
+		}
 		}
 		
 		PrintWriter save = new PrintWriter("C:\\Dentist\\PatientDetails.txt");
