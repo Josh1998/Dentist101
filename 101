@@ -1,8 +1,12 @@
 import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.PrintWriter;
 
 public class DentistPractice {
 	
-	 static final Scanner Menu = new Scanner(System.in);	
+	 static final Scanner Menu = new Scanner(System.in);
+	 private static Scanner input = new Scanner(System.in);
 
 	public static void main(String[] args) throws Exception {
 		//loadData();
@@ -86,7 +90,7 @@ public class DentistPractice {
 			System.out.println("Tries exceeded, Returning to menu.");
 		}}
 	
-	private static void Admin() {
+	private static void Admin() throws FileNotFoundException {
 		Scanner admin = new Scanner(System.in);
 		
 		for(int i=0; i<3; i++) {
@@ -205,7 +209,7 @@ public class DentistPractice {
 		
 	}
 
-	private static void adminSubMenu() {
+	private static void adminSubMenu() throws FileNotFoundException {
 
 		final Scanner A = new Scanner(System.in);
 		
@@ -305,8 +309,55 @@ public class DentistPractice {
 
 
 
-	private static void AddremovePatient() {
-		// TODO Auto-generated method stub
+	public static void AddremovePatient() throws FileNotFoundException {
+		
+		Scanner PatientDetails = new Scanner(new FileReader("C:\\Dentist\\PatientDetails.txt"));
+		final PatientDetailsA[] PatientDetailsArray = new PatientDetailsA[5];
+		
+		int amount = 0;
+		
+		while(PatientDetails.hasNext()) {
+			String firstName = PatientDetails.next();
+			String lastName = PatientDetails.next();
+			String password = PatientDetails.next();
+			
+			PatientDetailsArray[amount] = new PatientDetailsA(firstName, lastName, password);
+			amount++;
+			
+		}
+		
+		System.out.println("Please enter you first name:");
+		String firstNameRemove = input.nextLine();
+		
+		System.out.println("Please enter you last name:");
+		String lastNameRemove = input.nextLine();
+		
+		System.out.println("Please enter you password:");
+		String passwordRemove = input.nextLine();
+		
+		String remove = "free";
+		
+		for (int i = 0; i<PatientDetailsArray.length; i++)
+		{
+			if ((PatientDetailsArray[i].getFirstName().equals(firstNameRemove))&&(PatientDetailsArray[i].getLastName().equals(lastNameRemove))&&(PatientDetailsArray[i].getPassword().equals(passwordRemove)))
+			{
+				// System.out.println(PatientDetailsArray[i].toString());
+				PatientDetailsArray[i].removeFirstName(remove);
+				PatientDetailsArray[i].removeLastName(remove);
+				PatientDetailsArray[i].removePassword(remove);
+				break;
+			}
+		}
+		
+		PrintWriter save = new PrintWriter("C:\\Dentist\\PatientDetails.txt");
+
+		for (int i=0; i<PatientDetailsArray.length ; i++)
+		  {
+		     save.println(PatientDetailsArray[i].save());
+		  }
+		save.close();
+		
+		System.out.println("Data Saved.");
 		
 	}
 
