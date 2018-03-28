@@ -42,6 +42,22 @@ public class PatientDetailsA {
 		return this.firstDentist;
 	}
 	
+	public void addFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public void addLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	public void addPassword(String password) {
+		this.password = password;
+	}
+	
+	public void addAddress(String address) {
+		this.address = address;
+	}
+	
 	public void removeFirstName(String firstName) {
 		this.firstName = firstName;
 	}
@@ -63,7 +79,7 @@ public class PatientDetailsA {
 	}
 	
 	public String save() {
-		String finish = firstName + " " + lastName + " " + password + " " + address + " " + firstDentist;
+		String finish = patientID + " " + firstName + " " + lastName + " " + password + " " + address + " " + firstDentist;
 		return finish;
 	}
 
