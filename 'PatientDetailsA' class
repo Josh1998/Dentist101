@@ -1,17 +1,26 @@
 public class PatientDetailsA {
 	
+	String patientID;
 	String firstName;
 	String lastName;
 	String password;
+	String address;
+	String firstDentist;
+	
 
 
-	public PatientDetailsA(String firstName, String lastName, String password) {
+	public PatientDetailsA(String patientID,String firstName, String lastName, String password, String address, String firstDentist) {
+		this.patientID = patientID;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
+		this.address = address;
+		this.firstDentist = firstDentist;
 	}
 
-
+	public String getPatientID() {
+		return this.patientID;
+	}
 
 	public String getFirstName() {
 		return this.firstName;
@@ -23,6 +32,14 @@ public class PatientDetailsA {
 	
 	public String getPassword() {
 		return this.password;
+	}
+	
+	public String getAddress() {
+		return this.address;
+	}
+	
+	public String getFirstDentist() {
+		return this.firstDentist;
 	}
 	
 	public void removeFirstName(String firstName) {
@@ -37,8 +54,16 @@ public class PatientDetailsA {
 		this.password = password;
 	}
 	
+	public void removeAddress(String address) {
+		this.address = address;
+	}
+	
+	public void removeFirstDentist(String firstDentist) {
+		this.firstDentist = firstDentist;
+	}
+	
 	public String save() {
-		String finish = firstName + " " + lastName + " " + password;
+		String finish = firstName + " " + lastName + " " + password + " " + address + " " + firstDentist;
 		return finish;
 	}
 
