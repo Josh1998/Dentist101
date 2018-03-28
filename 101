@@ -317,11 +317,15 @@ public class DentistPractice {
 		int amount = 0;
 		
 		while(PatientDetails.hasNext()) {
+			
+			String patientID = PatientDetails.next();
 			String firstName = PatientDetails.next();
 			String lastName = PatientDetails.next();
 			String password = PatientDetails.next();
+			String address = PatientDetails.next();
+			String firstDentist = PatientDetails.next();
 			
-			PatientDetailsArray[amount] = new PatientDetailsA(firstName, lastName, password);
+			PatientDetailsArray[amount] = new PatientDetailsA(patientID, firstName, lastName, password, address, firstDentist);
 			amount++;
 			
 		}
@@ -345,6 +349,8 @@ public class DentistPractice {
 				PatientDetailsArray[i].removeFirstName(remove);
 				PatientDetailsArray[i].removeLastName(remove);
 				PatientDetailsArray[i].removePassword(remove);
+				PatientDetailsArray[i].removeAddress(remove);
+				PatientDetailsArray[i].removeFirstDentist(remove);
 				break;
 			}
 		}
