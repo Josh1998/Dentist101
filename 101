@@ -4,9 +4,10 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 
 public class DentistPractice {
-	
-	 static final Scanner Menu = new Scanner(System.in);
+	static final Scanner Menu = new Scanner(System.in);
 	 private static Scanner input = new Scanner(System.in);
+	 private static final Appointment[] appointments = new Appointment[18];
+	 
 
 	public static void main(String[] args) throws Exception {
 		//loadData();
@@ -49,7 +50,7 @@ public class DentistPractice {
 
 }
 
-	private static void Patient() {
+	private static void Patient() throws FileNotFoundException {
 		Scanner patients = new Scanner(System.in);
 		
 		for(int i=0; i<3; i++) {
@@ -70,7 +71,7 @@ public class DentistPractice {
 		
 	}}
 	
-	private static void Dentist() {
+	private static void Dentist() throws FileNotFoundException {
 		Scanner dentist = new Scanner(System.in);
 		
 		for(int i=0; i<3; i++) {
@@ -115,7 +116,7 @@ public class DentistPractice {
 	}
 	
 	
-	private static void patientSubMenu() {
+	private static void patientSubMenu() throws FileNotFoundException {
 		
 		 final Scanner P = new Scanner(System.in);
 		 
@@ -146,7 +147,7 @@ public class DentistPractice {
 					break;
 				}
 				case "4" : {
-					RequestAppointment();
+					requestAppointment();
 					break;
 				}
 				case "5" : {
@@ -164,7 +165,7 @@ public class DentistPractice {
 		
 	}
 	
-	private static void dentistSubMenu() {
+	private static void dentistSubMenu() throws FileNotFoundException {
 		final Scanner D = new Scanner(System.in);
 		
 		String choice = "";
@@ -185,7 +186,7 @@ public class DentistPractice {
 					break;
 				}
 				case "2" : {
-					viewCalendar();
+					displayAppointment();
 					break;
 				}
 				case "3" : {
@@ -246,7 +247,7 @@ public class DentistPractice {
 					break;
 				}
 				case "5" : {
-					ListAppointments();
+					displayAppointment();
 					break;
 				}
 				case "6" : {
@@ -262,54 +263,8 @@ public class DentistPractice {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-
-	
-
-	
-
-	
-
-	
-	
-
-	
 		
-	
-
-
-
-	public static void AddremovePatient() throws FileNotFoundException {
+public static void AddremovePatient() throws FileNotFoundException {
 		
 		final Scanner answer = new Scanner(System.in);
 		Scanner PatientDetails = new Scanner(new FileReader("C:\\Dentist\\PatientDetails.txt"));
@@ -435,10 +390,10 @@ public class DentistPractice {
 		
 	}
 
-	private static void ListAppointments() {
+	//private static void ListAppointments() {
 		// TODO Auto-generated method stub
 		
-	}
+	//}
 
 	private static void ListPreviousVisits() {
 		// TODO Auto-generated method stub
@@ -455,10 +410,6 @@ public class DentistPractice {
 		
 	}
 
-	private static void viewCalendar() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	private static void listPreviousAppointments() {
 		// TODO Auto-generated method stub
@@ -482,12 +433,171 @@ public class DentistPractice {
 		// TODO Auto-generated method stub
 		
 	}
-	private static void RequestAppointment() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	private static void Privacy() {
 		// TODO Auto-generated method stub
 		
-	}}
+	}
+	private static void loadAppointments() throws FileNotFoundException {
+		
+		Scanner file = new Scanner(new FileReader("D://Appointments.txt"));
+		int index = 0;
+		
+			while (file.hasNext()) {
+			String Weekday = file.next();
+			String TimeOfAppointment = file.next();
+			String Dentist = file.next();
+			String TypeOfAilment = file.next();
+			String ID = file.next();
+			
+			
+			
+			appointments[index] = new Appointment(Weekday, TimeOfAppointment, Dentist, TypeOfAilment, ID);
+			index++;
+		}
+			
+		file.close();
+}
+	
+	private static void displayAppointment() throws FileNotFoundException {
+		System.out.println("\n--Available Appointments --");
+		
+		loadAppointments();
+		
+		System.out.println("");
+		
+		for (int i=0; i<appointments.length; i++) { 
+			System.out.println(appointments[i].toString());
+		
+		}
+		System.out.println("");
+	}
+	
+	private static void requestAppointment() throws FileNotFoundException {
+		String Weekday = "";
+		String TimeOfAppointment = "";
+		String Dentist = "";
+		String SelectedAilment = "";
+		String SelectedID = "free";
 
+		loadAppointments();
+
+	System.out.println("Whom whould you like your appointment with? [DrJosh / DrJames / DrPaul]");
+	String ChoiceOfDentist = input.next();
+	if (ChoiceOfDentist.equals("DrJosh")) {
+		Dentist = "DrJosh";
+	System.out.println("DrJosh's working hours are: Monday/Tuesday");
+	}
+	else if (ChoiceOfDentist.equals("DrJames")) {
+		Dentist = "DrJames";
+	System.out.println("DrJames' working hours are: Wednesday/Thursday");
+	}
+	else if (ChoiceOfDentist.equals("DrPaul")) {
+		Dentist = "DrPaul";
+	System.out.println("DrPauls's working hours are: Friday/Saturday");	
+		}
+	
+	System.out.println("What is the purpose of this appointment? ");
+	System.out.println("Type 1 for 'Toothache'");
+	System.out.println("Type 2 for 'Accident'");
+	System.out.println("Type 3 for 'Bleeding'");
+	System.out.println("Type 4 for 'Over-Sensitive'");
+	System.out.println("Type 5 for 'Other'");
+	{
+	SelectedAilment = input.next().toUpperCase();
+	
+	if (SelectedAilment.equals("1")) {
+		SelectedAilment = "Toothache";
+		}
+	else if (SelectedAilment.equals("2")) {
+		SelectedAilment = "Accident";
+		}
+	else if (SelectedAilment.equals("3")) {
+		SelectedAilment = "Bleeding";
+		}
+	else if (SelectedAilment.equals("4")) {
+		SelectedAilment = "Over-Sensitive";
+		}
+	else if (SelectedAilment.equals("5")) {
+		SelectedAilment = "Other";
+		}
+	System.out.println("\nIf you are happy with your choices:");
+	System.out.println("please enter your ID below:");
+	
+	SelectedID = input.next();
+	
+	System.out.println("\nThe appointment below matches/or is the best match based on your choices :");
+	
+	for (int i=0; i<appointments.length; i++) { 
+		
+		if ((appointments[i].getDentist().equals(Dentist))&&(appointments[i].getTypeOfAilment().equals("free")&&(appointments[i].getID().equals("free"))))
+			
+		{
+			
+			System.out.println(appointments[i].toString());
+		    appointments[i].order(SelectedAilment,SelectedID);
+		     break;
+		}
+		
+	}}}
+	
+	
+private static void cancelAppointment() {
+		
+		System.out.println("What was the purpose of the appointment?");
+		System.out.println("\nType 1 for 'Toothache'");
+		System.out.println("Type 2 for 'Accident'");
+		System.out.println("Type 3 for 'Bleeding'");
+		System.out.println("Type 4 for 'Over-Sensitive'");
+		System.out.println("Type 5 for 'Other'");
+		String cancelAilment = input.next();
+		
+		if (cancelAilment.equals("1")) {
+			cancelAilment = "Toothache";
+			}
+		else if (cancelAilment.equals("2")) {
+			cancelAilment = "Accident";
+			}
+		else if (cancelAilment.equals("3")) {
+			cancelAilment = "Bleeding";
+			}
+		else if (cancelAilment.equals("4")) {
+			cancelAilment = "Over-Sensitive";
+			}
+		else if (cancelAilment.equals("5")) {
+			cancelAilment = "Other";
+			}
+		
+		System.out.println("\nEnter your Unique ID:");
+		String cancelID = input.next();
+		
+		String cancel = "free";
+	
+		for (int i=0; i<appointments.length; i++) 
+		{ 
+			
+			if ((appointments[i].getTypeOfAilment().equals(cancelAilment))&&(appointments[i].getID().equals(cancelID))) {
+				
+				System.out.println(appointments[i].toString());
+			     appointments[i].cancel(cancel, cancel);
+			     
+			    System.out.println("\nThe above appointment has been successfully cancelled");
+	
+	}}}
+public static void saveUponExit() throws FileNotFoundException{
+	
+	
+	PrintWriter saveAppointmentData = new PrintWriter("D://Appointments.txt");    
+
+    for (int i=0; i<appointments.length ; i++)
+    {
+    	
+        saveAppointmentData.println(appointments[i]);
+        
+    }
+    saveAppointmentData.close();
+	
+	
+}
+
+}
