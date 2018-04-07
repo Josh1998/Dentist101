@@ -8,7 +8,6 @@ public class PatientDetailsA {
 	String firstDentist;
 	
 
-
 	public PatientDetailsA(String patientID,String firstName, String lastName, String password, String address, String firstDentist) {
 		this.patientID = patientID;
 		this.firstName = firstName;
@@ -17,6 +16,11 @@ public class PatientDetailsA {
 		this.address = address;
 		this.firstDentist = firstDentist;
 	}
+	
+	public String display() {
+		String result = patientID + " " + firstName + " " + lastName;
+		return result;
+		}
 
 	public String getPatientID() {
 		return this.patientID;
@@ -75,6 +79,10 @@ public class PatientDetailsA {
 	}
 	
 	public void removeFirstDentist(String firstDentist) {
+		this.firstDentist = firstDentist;
+	}
+	
+	public void changeFirstDentist(String firstDentist) {
 		this.firstDentist = firstDentist;
 	}
 	
