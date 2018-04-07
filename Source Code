@@ -1,0 +1,842 @@
+import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.PrintWriter;
+
+public class DentistPractice {
+	
+	static final Scanner Menu = new Scanner(System.in);
+	private static Scanner input = new Scanner(System.in);
+	 
+	final static PatientDetailsA[] PatientDetailsArray = new PatientDetailsA[5];
+	final static dentistDetailsA[] dentistDetailsArray = new dentistDetailsA[3];
+	 
+	 	static String globalPatientID = "notFilledIn";
+	 	static String globalPatientFirstName = "notFilledIn";
+		static String globalPatientLastName = "notFilledIn";
+		static String globalPatientPassword = "notFilledIn";
+		
+		static String globalDentistID = "notFilledIn";
+	 	static String globalDentistFirstName = "notFilledIn";
+		static String globalDentistLastName = "notFilledIn";
+		static String globalDentistPassword = "notFilledIn";
+
+	public static void main(String[] args) throws Exception {
+		//loadData();
+
+		String choice = "";
+
+		System.out.println("-- Welcome to the Dentists --");
+
+
+		System.out.println();
+
+		do {
+			System.out.println("1 - Admin");
+			System.out.println("2 - Dentist");
+			System.out.println("3 - Patient");
+			System.out.println("Q - Quit");
+			System.out.print("Pick : ");
+
+			choice = Menu.next().toUpperCase();
+
+			switch (choice) {
+				case "1" : {
+					Admin();
+					break;
+				}
+				case "2" : {
+					Dentist();
+					break;
+				}
+				case "3" : {
+					Patient();
+					break;
+				}
+				case "4" : {
+
+					break;
+				}
+			}
+		} while (!choice.equals("Q"));
+
+}
+
+	public static void Patient() throws FileNotFoundException {
+		
+		
+		
+		Scanner PatientDetails = new Scanner(new FileReader("C:\\Dentist\\PatientDetails.txt"));
+		final PatientDetailsA[] PatientDetailsArray = new PatientDetailsA[5];
+		
+		int amount = 0;
+		
+		while(PatientDetails.hasNext()) {
+			
+			String patientID = PatientDetails.next();
+			String firstName = PatientDetails.next();
+			String lastName = PatientDetails.next();
+			String password = PatientDetails.next();
+			String address = PatientDetails.next();
+			String firstDentist = PatientDetails.next();
+			
+			PatientDetailsArray[amount] = new PatientDetailsA(patientID, firstName, lastName, password, address, firstDentist);
+			amount++;
+		}
+			
+			
+		
+			System.out.println("Please input your patientID:");
+			String logInPatientID = input.next();
+			System.out.println("Please input your first name:");
+			String logInFirstName = input.next();
+			System.out.println("Please input your last name:");
+			String logInLastName = input.next();
+			System.out.println("Please input your password:");
+			String logInPassword = input.next();
+			
+			for (int i = 0; i<PatientDetailsArray.length; i++)
+			{
+				
+				if ((PatientDetailsArray[i].getPatientID().equals(logInPatientID))&&(PatientDetailsArray[i].getFirstName().equals(logInFirstName))&&(PatientDetailsArray[i].getLastName().equals(logInLastName))&&(PatientDetailsArray[i].getPassword().equals(logInPassword)))
+				{
+					System.out.println("Your chosen account is:");
+					System.out.println(PatientDetailsArray[i].display());
+					globalPatientID = logInPatientID;
+					globalPatientFirstName = logInFirstName;
+					globalPatientLastName = logInLastName;
+					globalPatientPassword = logInPassword;
+					break;
+				}
+			}
+			
+			if (globalPatientPassword.equals("notFilledIn")) {
+				 System.out.println("Your username or password is incorrect");
+				
+			}
+			else { System.out.println("Successfully logged in");
+				patientSubMenu();
+			}	
+	}
+	
+	private static void Dentist() throws FileNotFoundException {
+		
+		Scanner dentistDetails = new Scanner(new FileReader("C:\\Dentist\\dentistDetails.txt"));
+		
+		int amount = 0;
+		
+		while(dentistDetails.hasNext()) {
+			
+			String dentistID = dentistDetails.next();
+			String firstName = dentistDetails.next();
+			String lastName = dentistDetails.next();
+			String password = dentistDetails.next();
+			String address = dentistDetails.next();
+			
+			
+			dentistDetailsArray[amount] = new dentistDetailsA(dentistID, firstName, lastName, password, address);
+			amount++;
+			
+		}
+			
+			System.out.println("Please input your patientID:");
+			String logInDentistID = input.next();
+			System.out.println("Please input your first name:");
+			String logInFirstName = input.next();
+			System.out.println("Please input your last name:");
+			String logInLastName = input.next();
+			System.out.println("Please input your password:");
+			String logInPassword = input.next();
+			
+			for (int i = 0; i<PatientDetailsArray.length; i++)
+			{
+				
+				if ((PatientDetailsArray[i].getPatientID().equals(logInDentistID))&&(PatientDetailsArray[i].getFirstName().equals(logInFirstName))&&(PatientDetailsArray[i].getLastName().equals(logInLastName))&&(PatientDetailsArray[i].getPassword().equals(logInPassword)))
+				{
+					System.out.println("Your chosen account is:");
+					System.out.println(PatientDetailsArray[i].display());
+					globalDentistID = logInDentistID;
+					globalDentistFirstName = logInFirstName;
+					globalDentistLastName = logInLastName;
+					globalDentistPassword = logInPassword;
+					break;
+				}
+			}
+			
+			if (globalDentistPassword.equals("notFilledIn")) {
+				 System.out.println("Your username or password is incorrect");
+				
+			}
+			else { System.out.println("Successfully logged in");
+				dentistSubMenu();
+			}
+	}
+	
+	private static void Admin() throws FileNotFoundException {
+		Scanner admin = new Scanner(System.in);
+		
+		for(int i=0; i<3; i++) {
+		
+			System.out.println("Please input username");
+			String usernameA = admin.next();
+			System.out.println("Please input password");
+			String passwordA = admin.next();
+			
+			if (usernameA.equals("Admin")&&passwordA.equals("password")) {
+				adminSubMenu();
+				break;
+				
+			}
+			else { System.out.println("Your username or password is incorrect, please try again");
+			
+			}
+		}
+			System.out.println("Returning to menu.");
+			
+		
+	}
+	
+	
+	private static void patientSubMenu() throws FileNotFoundException {
+		
+		 final Scanner P = new Scanner(System.in);
+		 
+		 String patientChoice = "";
+	
+		do {
+			System.out.println("1 - Add/change your personal details");
+			System.out.println("2 - Previous visits to the practice");
+			System.out.println("3 - Previous treatments received");
+			System.out.println("4 - Request an appointment");
+			System.out.println("5 - Do you allow your practice admin to view your treatment list (Y/N)");
+			System.out.println("Q - Quit");
+			System.out.print("Pick : ");
+
+			patientChoice = P.next().toUpperCase();
+
+			switch (patientChoice) {
+				case "1" : {
+					changePatientDetails();
+					break;
+				}
+				case "2" : {
+					PreviousVists();
+					break;
+				}
+				case "3" : {
+					PreviousTreatments();
+					break;
+				}
+				case "4" : {
+					RequestAppointment();
+					break;
+				}
+				case "5" : {
+					Privacy();
+					break;
+				}
+				case "6" : {
+
+					break;
+				}
+			}
+		} while (!patientChoice.equals("Q"));
+
+		
+		
+	}
+	
+	private static void dentistSubMenu() {
+		final Scanner D = new Scanner(System.in);
+		
+		String choice = "";
+		
+		do {
+			System.out.println("1 - Add/change personal details");
+			System.out.println("2 - View calendar");
+			System.out.println("3 - List previous appointments");
+			System.out.println("4 - Add treatment to a patient");
+			System.out.println("Q - Quit");
+			System.out.print("Pick : ");
+
+			choice = D.next().toUpperCase();
+
+			switch (choice) {
+				case "1" : {
+					AddremoveDetailsDentist();
+					break;
+				}
+				case "2" : {
+					viewCalendar();
+					break;
+				}
+				case "3" : {
+					listPreviousAppointments();
+					break;
+				}
+				case "4" : {
+					addTreatmentToPatient();
+					break;
+				}
+
+			}
+		} while (!choice.equals("Q"));
+		
+	}
+	
+	
+
+	private static void AddremoveDetailsDentist() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void adminSubMenu() throws FileNotFoundException {
+
+		final Scanner A = new Scanner(System.in);
+		
+		String choice = "";
+		
+		do {
+			System.out.println("1 - Add/remove dentist");
+			System.out.println("2 - Add/remove patient");
+			System.out.println("3 - Add/change first choice dentist");
+			System.out.println("4 - Alter working days");
+			System.out.println("5 - List upcoming appointments");
+			System.out.println("6 - List previous visits made");
+			System.out.println("7 - List treatments made");
+			System.out.println("Q - Quit");
+			System.out.print("Pick : ");
+
+			choice = A.next().toUpperCase();
+
+			switch (choice) {
+				case "1" : {
+					AddremoveDentist();
+					break;
+				}
+				case "2" : {
+					AddremovePatient();
+					break;
+				}
+				case "3" : {
+					AddremoveFirstChoice();
+					break;
+				}
+				case "4" : {
+					AlterDays();
+					break;
+				}
+				case "5" : {
+					ListAppointments();
+					break;
+				}
+				case "6" : {
+					ListPreviousVisits();
+					break;
+				}
+				case "7" : {
+					ListTreatments();
+					break;
+				}
+			}
+		} while (!choice.equals("Q"));
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+	
+
+	
+
+	
+
+	
+	
+
+	
+		
+	public static void loadPatientDetails() throws FileNotFoundException {
+		
+		Scanner PatientDetails = new Scanner(new FileReader("C:\\Dentist\\PatientDetails.txt"));
+		
+		
+		int amount = 0;
+		
+		while(PatientDetails.hasNext()) {
+			
+			String patientID = PatientDetails.next();
+			String firstName = PatientDetails.next();
+			String lastName = PatientDetails.next();
+			String password = PatientDetails.next();
+			String address = PatientDetails.next();
+			String firstDentist = PatientDetails.next();
+			
+			PatientDetailsArray[amount] = new PatientDetailsA(patientID, firstName, lastName, password, address, firstDentist);
+			amount++;
+			
+		}
+	}
+	
+	public static void savePatientDetails() throws FileNotFoundException {
+		
+		Scanner PatientDetails = new Scanner(new FileReader("C:\\Dentist\\PatientDetails.txt"));
+		
+		
+		PrintWriter save = new PrintWriter("C:\\Dentist\\PatientDetails.txt");
+
+		for (int i=0; i<PatientDetailsArray.length ; i++)
+		  {
+		     save.println(PatientDetailsArray[i].save());
+		  }
+		save.close();
+		
+		System.out.println("Data Saved.");
+	}
+
+	public static void AddremovePatient() throws FileNotFoundException {
+		
+		Scanner PatientDetails = new Scanner(new FileReader("C:\\Dentist\\PatientDetails.txt"));
+		
+		loadPatientDetails();
+		
+		String addPatient = "0";
+		String addFirstName = "free";
+		String addLastName = "free";
+		String addPassword = "free";
+		String addAddress = "free";
+		
+		System.out.println("Would you like to add or remove a patient?");
+		System.out.println("1 - Add");
+		System.out.println("2 - Remove");
+		
+		addPatient = input.next().toUpperCase();
+		
+		if (addPatient.equals("1")) {
+			
+			String empty = "free";
+			
+			System.out.println("Please remember to use the '_' instead of spaces, thank you.");
+			System.out.println(" ");
+			
+			System.out.println("Please enter first name:");
+			addFirstName = input.next();
+			
+			System.out.println("Please enter last name:");
+			addLastName = input.next();
+			
+			System.out.println("Please enter new password name:");
+			addPassword = input.next();
+			
+			System.out.println("Please enter address:");
+			addAddress = input.next();
+			
+			for (int i = 0; i<PatientDetailsArray.length; i++)
+			{
+			
+				if ((PatientDetailsArray[i].getFirstName().equals(empty))&&(PatientDetailsArray[i].getLastName().equals(empty))&&(PatientDetailsArray[i].getPassword().equals(empty))&&(PatientDetailsArray[i].getAddress().equals(empty))&&(PatientDetailsArray[i].getFirstDentist().equals(empty)))
+				{
+					PatientDetailsArray[i].addFirstName(addFirstName);
+					PatientDetailsArray[i].addLastName(addLastName);
+					PatientDetailsArray[i].addPassword(addPassword);
+					PatientDetailsArray[i].addAddress(addAddress);
+					
+					break;
+				}
+			
+			}
+			
+			
+			
+		}
+		
+		
+		else {
+		
+		System.out.println("Please enter first name:");
+		String firstNameRemove = input.next();
+		
+		System.out.println("Please enter last name:");
+		String lastNameRemove = input.next();
+		
+		System.out.println("Please enter password:");
+		String passwordRemove = input.next();
+		
+		String remove = "free";
+		
+		for (int i = 0; i<PatientDetailsArray.length; i++)
+		{
+			if ((PatientDetailsArray[i].getFirstName().equals(firstNameRemove))&&(PatientDetailsArray[i].getLastName().equals(lastNameRemove))&&(PatientDetailsArray[i].getPassword().equals(passwordRemove)))
+			{
+				
+				PatientDetailsArray[i].removeFirstName(remove);
+				PatientDetailsArray[i].removeLastName(remove);
+				PatientDetailsArray[i].removePassword(remove);
+				PatientDetailsArray[i].removeAddress(remove);
+				PatientDetailsArray[i].removeFirstDentist(remove);
+				break;
+			}
+		}
+		
+		
+		
+		}
+		
+		savePatientDetails();
+		
+	}
+
+	private static void AddremoveFirstChoice() throws FileNotFoundException {
+		
+		loadPatientDetails();
+		
+		String change = "free";
+		
+		System.out.println("Please enter first name:");
+		String FirstName = input.next();
+		
+		System.out.println("Please enter last name:");
+		String LastName = input.next();
+		
+		System.out.println("Please enter new password name:");
+		String Password = input.next();
+		
+		System.out.println("Would you like to add or remove your First Choice dentist?");
+		System.out.println("1 - Add");
+		System.out.println("2 - Remove");
+		
+		String addFirstChoice = input.next().toUpperCase();
+		
+		if (addFirstChoice.equals("1")) {
+		
+			for (int i = 0; i<PatientDetailsArray.length; i++)
+			{
+			
+				if ((PatientDetailsArray[i].getFirstName().equals(FirstName))&&(PatientDetailsArray[i].getLastName().equals(LastName))&&(PatientDetailsArray[i].getPassword().equals(Password)))
+				{
+					System.out.println("Please enter your First Choice dentist's:");
+					String FirstDentist = input.next();
+					PatientDetailsArray[i].changeFirstDentist(FirstDentist);
+					break;
+				}
+				
+			}
+		}
+		
+		else {
+			
+			for (int i = 0; i<PatientDetailsArray.length; i++)
+			{
+			
+				if ((PatientDetailsArray[i].getFirstName().equals(FirstName))&&(PatientDetailsArray[i].getLastName().equals(LastName))&&(PatientDetailsArray[i].getPassword().equals(Password)))
+				{
+					
+					PatientDetailsArray[i].changeFirstDentist(change);
+					break;
+				}
+				
+			}
+			
+		}
+		
+		savePatientDetails();
+		
+	}
+
+	private static void AlterDays() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void ListAppointments() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void ListPreviousVisits() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void ListTreatments() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public static void loadDentistDetails() throws FileNotFoundException {
+	
+		Scanner dentistDetails = new Scanner(new FileReader("C:\\Dentist\\dentistDetails.txt"));
+
+		
+		int amount = 0;
+		
+		while(dentistDetails.hasNext()) {
+			
+			String dentistID = dentistDetails.next();
+			String firstName = dentistDetails.next();
+			String lastName = dentistDetails.next();
+			String password = dentistDetails.next();
+			String address = dentistDetails.next();
+			
+			
+			dentistDetailsArray[amount] = new dentistDetailsA(dentistID, firstName, lastName, password, address);
+			amount++;
+			
+		}
+	}
+	
+	public static void saveDentistDetails() throws FileNotFoundException {
+		
+
+		PrintWriter save = new PrintWriter("C:\\Dentist\\PatientDetails.txt");
+
+		for (int i=0; i<dentistDetailsArray.length ; i++)
+		  {
+		     save.println(dentistDetailsArray[i].save());
+		  }
+		save.close();
+		
+		System.out.println("Data Saved.");
+	}
+
+	private static void AddremoveDentist() throws FileNotFoundException {
+		
+		loadDentistDetails();
+		
+		String addDentist = "0";
+		String addFirstName = "free";
+		String addLastName = "free";
+		String addPassword = "free";
+		String addAddress = "free";
+		
+		System.out.println("Would you like to add or remove a Dentist?");
+		System.out.println("1 - Add");
+		System.out.println("2 - Remove");
+		
+		addDentist = input.next().toUpperCase();
+		
+		if (addDentist.equals("1")) {
+			
+			String empty = "free";
+			
+			System.out.println("Please remember to use the '_' instead of spaces, thank you.");
+			System.out.println(" ");
+			
+			System.out.println("Please enter first name:");
+			addFirstName = input.next();
+			
+			System.out.println("Please enter last name:");
+			addLastName = input.next();
+			
+			System.out.println("Please enter new password:");
+			addPassword = input.next();
+			
+			System.out.println("Please enter address:");
+			addAddress = input.next();
+			
+			for (int i = 0; i<dentistDetailsArray.length; i++)
+			{
+			
+				if ((dentistDetailsArray[i].getFirstName().equals(empty))&&(dentistDetailsArray[i].getLastName().equals(empty))&&(dentistDetailsArray[i].getPassword().equals(empty)))
+				{
+					
+					dentistDetailsArray[i].addFirstName(addFirstName);
+					dentistDetailsArray[i].addLastName(addLastName);
+					dentistDetailsArray[i].addPassword(addPassword);
+					dentistDetailsArray[i].addAddress(addAddress);
+					
+					break;
+				}
+			
+			}
+			
+			
+			
+		}
+		
+		
+		else {
+		
+		
+		
+		System.out.println("Please enter first name:");
+		String firstNameRemove = input.next();
+		
+		System.out.println("Please enter last name:");
+		String lastNameRemove = input.next();
+		
+		System.out.println("Please enter password:");
+		String passwordRemove = input.next();
+		
+		String remove = "free";
+		
+		for (int i = 0; i<dentistDetailsArray.length; i++)
+		{
+			if ((dentistDetailsArray[i].getFirstName().equals(firstNameRemove))&&(dentistDetailsArray[i].getLastName().equals(lastNameRemove))&&(dentistDetailsArray[i].getPassword().equals(passwordRemove)))
+			{
+				
+				dentistDetailsArray[i].removeFirstName(remove);
+				dentistDetailsArray[i].removeLastName(remove);
+				dentistDetailsArray[i].removePassword(remove);
+				dentistDetailsArray[i].removeAddress(remove);
+				break;
+			}
+		}
+		}
+		
+		
+	}
+
+	private static void viewCalendar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void listPreviousAppointments() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void addTreatmentToPatient() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public static void changePatientDetails() throws FileNotFoundException {
+		
+		loadPatientDetails();
+		
+		String checkFirstName = globalPatientFirstName;
+		String checkLastName = globalPatientLastName;
+		String checkPassword = globalPatientPassword;
+		String checkPatientID = globalPatientID;
+
+		
+		System.out.println("Please remember to use the '_' instead of spaces, thank you.");
+		System.out.println(" ");
+		
+		System.out.println("Please enter new first name:");
+		String newFirstName = input.next();
+		
+		System.out.println("Please enter new last name:");
+		String newLastName = input.next();
+		
+		System.out.println("Please enter new password name:");
+		String newPassword = input.next();
+		
+		System.out.println("Please enter new address:");
+		String newAddress = input.next();
+		
+		System.out.println("Please enter new First Choice Dentist:");
+		String newFirstDentist = input.next();
+		
+		
+		for (int i = 0; i<PatientDetailsArray.length; i++)
+		{
+		
+			if ((PatientDetailsArray[i].getPatientID().equals(checkPatientID))&&(PatientDetailsArray[i].getFirstName().equals(checkFirstName))&&(PatientDetailsArray[i].getLastName().equals(checkLastName))&&(PatientDetailsArray[i].getPassword().equals(checkPassword)))
+			{
+				
+				PatientDetailsArray[i].addFirstName(newFirstName);
+				PatientDetailsArray[i].addLastName(newLastName);
+				PatientDetailsArray[i].addPassword(newPassword);
+				PatientDetailsArray[i].addAddress(newAddress); 
+				PatientDetailsArray[i].changeFirstDentist(newFirstDentist); 
+				
+				break;
+			}
+		
+		}
+		savePatientDetails();
+	}
+	
+	public static void changeDentistDetails() throws FileNotFoundException {
+		
+		loadDentistDetails();
+		
+		String checkFirstName = globalDentistFirstName;
+		String checkLastName = globalDentistLastName;
+		String checkPassword = globalDentistPassword;
+		String checkPatientID = globalDentistID;
+
+		
+		System.out.println("Please remember to use the '_' instead of spaces, thank you.");
+		System.out.println(" ");
+		
+		System.out.println("Please enter new first name:");
+		String newFirstName = input.next();
+		
+		System.out.println("Please enter new last name:");
+		String newLastName = input.next();
+		
+		System.out.println("Please enter new password name:");
+		String newPassword = input.next();
+		
+		System.out.println("Please enter new address:");
+		String newAddress = input.next();
+		
+		for (int i = 0; i<PatientDetailsArray.length; i++)
+		{
+		
+			if ((dentistDetailsArray[i].getDentistID().equals(checkPatientID))&&(dentistDetailsArray[i].getFirstName().equals(checkFirstName))&&(dentistDetailsArray[i].getLastName().equals(checkLastName))&&(dentistDetailsArray[i].getPassword().equals(checkPassword)))
+			{
+				
+				dentistDetailsArray[i].addFirstName(newFirstName);
+				dentistDetailsArray[i].addLastName(newLastName);
+				dentistDetailsArray[i].addPassword(newPassword);
+				dentistDetailsArray[i].addAddress(newAddress);
+				
+				break;
+			}
+		
+		}
+		savePatientDetails();
+	}
+	
+	private static void PreviousVists() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void PreviousTreatments() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void RequestAppointment() {
+		// TODO Auto-generated method stub
+		
+	}
+	private static void Privacy() {
+		// TODO Auto-generated method stub
+		
+	}}
