@@ -17,12 +17,12 @@ public class patientTreatments {
 
 	}
 	public String displayTreatments() {
-	    String result = patientID + " " + treatment + " " + date + " " + doctor;
+	    String result = patientID + " " + treatment + " " + date + " DR " + doctor;
 	    	return result;
 	}
 	    	
 	public String displayTreatment() {
-	    String result = patientID + " " + treatment + " " + date + " " + doctor;
+	    String result = patientID + " " + treatment + " " + date + " DR " + doctor;
 	    	return result;
 	 }
 	
