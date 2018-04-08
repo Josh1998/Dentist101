@@ -1,0 +1,44 @@
+package treatmentsTest;
+
+public class patientTreatments {
+
+	String patientID;
+	String treatment;
+	String date;
+	String doctor;
+	
+		
+	
+	public patientTreatments(String patientID, String treatment, String date, String doctor)  {
+		this.patientID = patientID;
+		this.treatment = treatment;
+		this.date = date;
+		this.doctor = doctor;
+
+	}
+	public String displayTreatments() {
+	    String result = patientID + " " + treatment + " " + date + " " + doctor;
+	    	return result;
+	}
+	    	
+	public String displayTreatment() {
+	    String result = patientID + " " + treatment + " " + date + " " + doctor;
+	    	return result;
+	 }
+	
+	public String getPatientID() {
+		return this.patientID;
+	}
+                                                                                                     
+	public String getTreatment() {
+		return this.treatment;
+	}
+	
+	public String getDate() {
+		return this.date;
+	}
+	
+	public String getDoctor() {
+		return this.doctor;
+	
+}}
