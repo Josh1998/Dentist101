@@ -1,0 +1,55 @@
+package treatmentsTest;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.Scanner;
+import treatmentsTest.Treatments;
+
+
+
+public class Treatments {
+	private static Scanner group = new Scanner(System.in);
+	private static patientTreatments[] treatments = new patientTreatments[25];
+	
+	static String globalPatientID = "notFilledIn";
+
+	
+		// TODO Auto-generated constructor stub
+	
+	private static void treatmentList() throws FileNotFoundException {
+	
+		Scanner file = new Scanner(new FileReader("G:\\Treatments.txt"));
+		int statement = 0;
+	
+		while (file.hasNext()) {
+			String patientID = file.next();
+			String treatment = file.next();
+			String date = file.next();
+			String doctor = file.next();
+			
+			treatments[statement] = new patientTreatments(patientID, treatment, date, doctor);
+			statement++;
+		}
+		file.close();
+	}
+	public static void displayTreatment() throws FileNotFoundException {
+		
+		String checkPatientID = globalPatientID;
+		
+		Scanner file = new Scanner(new FileReader("G:\\Treatments.txt"));
+		
+		System.out.println("Please input your patientID:");
+		String logInPatientID = group.next();
+		
+		for (int i = 0; i<treatments.length; i++)
+		{
+						
+						if ((treatments[i].getPatientID().equals(checkPatientID)))
+						{
+							System.out.println("Your treatment information is:");
+							System.out.println(treatments[i].displayTreatment()); 
+		        
+		}}}}
+
+
