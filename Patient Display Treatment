@@ -39,9 +39,6 @@ public class Treatments {
 		
 		Scanner file = new Scanner(new FileReader("G:\\Treatments.txt"));
 		
-		System.out.println("Please input your patientID:");
-		String logInPatientID = group.next();
-		
 		for (int i = 0; i<treatments.length; i++)
 		{
 						
