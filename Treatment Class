@@ -24,8 +24,11 @@ public class patientTreatments {
 	public String displayTreatment() {
 	    String result = patientID + " " + treatment + " " + date + " Dr " + doctor;
 	    	return result;
-	 }
-	
+	}
+	public String displayTreatmentForDentist() {
+	    String result = patientID + " " + treatment + " " + date + " Dr " + dentist;
+	    	return result;
+	}
 	public String getPatientID() {
 		return this.patientID;
 	}
