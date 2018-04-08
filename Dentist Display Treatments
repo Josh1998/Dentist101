@@ -1,0 +1,52 @@
+package treatmentsTest;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.Scanner;
+import treatmentsTest.Treatments;
+
+
+
+public class Treatments {
+	private static Scanner group = new Scanner(System.in);
+	private static patientTreatments[] treatments = new patientTreatments[25];
+	
+	static String globalDentistLastName = "notFilledIn";
+
+	
+		// TODO Auto-generated constructor stub
+	
+	private static void treatmentList() throws FileNotFoundException {
+	
+		Scanner file = new Scanner(new FileReader("G:\\Treatments.txt"));
+		int statement = 0;
+	
+		while (file.hasNext()) {
+			String patientID = file.next();
+			String treatment = file.next();
+			String date = file.next();
+			String dentist = file.next();
+			
+			treatments[statement] = new patientTreatments(patientID, treatment, date, dentist);
+			statement++;
+		}
+		file.close();
+	}
+	public static void displayTreatmentForDentist() throws FileNotFoundException {
+		
+		String checkDentistLastName = globalDentistLastName;
+		
+		Scanner file = new Scanner(new FileReader("G:\\Treatments.txt"));
+		
+		
+		for (int i = 0; i<treatments.length; i++)
+		{
+						
+						if ((treatments[i].getDentist().equals(checkDentistLastName)))
+						{
+							System.out.println("Your treatment information is:");
+							System.out.println(treatments[i].displayTreatment()); 
+		        
+		}}}}
+
