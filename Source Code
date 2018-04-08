@@ -22,14 +22,15 @@ public class DentistPractice {
 		static String globalDentistPassword = "notFilledIn";
 
 	public static void main(String[] args) throws Exception {
-		//loadData();
+		
 
 		String choice = "";
 
 		System.out.println("-- Welcome to the Dentists --");
-
-
-		System.out.println();
+		System.out.println(" ");
+		
+		loadPatientDetails();
+		loadDentistDetails();
 
 		do {
 			System.out.println("1 - Admin");
@@ -59,32 +60,15 @@ public class DentistPractice {
 				}
 			}
 		} while (!choice.equals("Q"));
-
+		
+		savePatientDetails();
+		saveDentistDetails();
+		
 }
 
 	public static void Patient() throws FileNotFoundException {
 		
-		
-		
 		Scanner PatientDetails = new Scanner(new FileReader("C:\\Dentist\\PatientDetails.txt"));
-		final PatientDetailsA[] PatientDetailsArray = new PatientDetailsA[5];
-		
-		int amount = 0;
-		
-		while(PatientDetails.hasNext()) {
-			
-			String patientID = PatientDetails.next();
-			String firstName = PatientDetails.next();
-			String lastName = PatientDetails.next();
-			String password = PatientDetails.next();
-			String address = PatientDetails.next();
-			String firstDentist = PatientDetails.next();
-			
-			PatientDetailsArray[amount] = new PatientDetailsA(patientID, firstName, lastName, password, address, firstDentist);
-			amount++;
-		}
-			
-			
 		
 			System.out.println("Please input your patientID:");
 			String logInPatientID = input.next();
@@ -122,24 +106,8 @@ public class DentistPractice {
 	private static void Dentist() throws FileNotFoundException {
 		
 		Scanner dentistDetails = new Scanner(new FileReader("C:\\Dentist\\dentistDetails.txt"));
-		
-		int amount = 0;
-		
-		while(dentistDetails.hasNext()) {
 			
-			String dentistID = dentistDetails.next();
-			String firstName = dentistDetails.next();
-			String lastName = dentistDetails.next();
-			String password = dentistDetails.next();
-			String address = dentistDetails.next();
-			
-			
-			dentistDetailsArray[amount] = new dentistDetailsA(dentistID, firstName, lastName, password, address);
-			amount++;
-			
-		}
-			
-			System.out.println("Please input your patientID:");
+			System.out.println("Please input your DentistID:");
 			String logInDentistID = input.next();
 			System.out.println("Please input your first name:");
 			String logInFirstName = input.next();
@@ -151,10 +119,10 @@ public class DentistPractice {
 			for (int i = 0; i<PatientDetailsArray.length; i++)
 			{
 				
-				if ((PatientDetailsArray[i].getPatientID().equals(logInDentistID))&&(PatientDetailsArray[i].getFirstName().equals(logInFirstName))&&(PatientDetailsArray[i].getLastName().equals(logInLastName))&&(PatientDetailsArray[i].getPassword().equals(logInPassword)))
+				if ((dentistDetailsArray[i].getDentistID().equals(logInDentistID))&&(dentistDetailsArray[i].getFirstName().equals(logInFirstName))&&(dentistDetailsArray[i].getLastName().equals(logInLastName))&&(dentistDetailsArray[i].getPassword().equals(logInPassword)))
 				{
 					System.out.println("Your chosen account is:");
-					System.out.println(PatientDetailsArray[i].display());
+					System.out.println(dentistDetailsArray[i].display());
 					globalDentistID = logInDentistID;
 					globalDentistFirstName = logInFirstName;
 					globalDentistLastName = logInLastName;
@@ -343,49 +311,7 @@ public class DentistPractice {
 		} while (!choice.equals("Q"));
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-
-	
-
-	
-
-	
-
-	
-	
-
-	
+		
 		
 	public static void loadPatientDetails() throws FileNotFoundException {
 		
@@ -429,7 +355,7 @@ public class DentistPractice {
 		
 		Scanner PatientDetails = new Scanner(new FileReader("C:\\Dentist\\PatientDetails.txt"));
 		
-		loadPatientDetails();
+		
 		
 		String addPatient = "0";
 		String addFirstName = "free";
@@ -471,7 +397,6 @@ public class DentistPractice {
 					PatientDetailsArray[i].addLastName(addLastName);
 					PatientDetailsArray[i].addPassword(addPassword);
 					PatientDetailsArray[i].addAddress(addAddress);
-					
 					break;
 				}
 			
@@ -509,17 +434,29 @@ public class DentistPractice {
 			}
 		}
 		
-		
+//		for (int i = 0; i<PatientDetailsArray.length; i++)
+//		{
+//			if ((PatientDetailsArray[i].getFirstName().equals(firstNameRemove))&&(PatientDetailsArray[i].getLastName().equals(lastNameRemove))&&(PatientDetailsArray[i].getPassword().equals(passwordRemove)))
+//			{
+//				
+//				PatientDetailsArray[i].removeFirstName(remove);
+//				PatientDetailsArray[i].removeLastName(remove);
+//				PatientDetailsArray[i].removePassword(remove);
+//				PatientDetailsArray[i].removeAddress(remove);
+//				PatientDetailsArray[i].removeFirstDentist(remove);
+//				break;
+//			}
+//		}
 		
 		}
 		
-		savePatientDetails();
+
 		
 	}
 
 	private static void AddremoveFirstChoice() throws FileNotFoundException {
 		
-		loadPatientDetails();
+
 		
 		String change = "free";
 		
@@ -570,7 +507,7 @@ public class DentistPractice {
 			
 		}
 		
-		savePatientDetails();
+	
 		
 	}
 
@@ -632,7 +569,7 @@ public class DentistPractice {
 
 	private static void AddremoveDentist() throws FileNotFoundException {
 		
-		loadDentistDetails();
+		
 		
 		String addDentist = "0";
 		String addFirstName = "free";
@@ -675,7 +612,6 @@ public class DentistPractice {
 					dentistDetailsArray[i].addLastName(addLastName);
 					dentistDetailsArray[i].addPassword(addPassword);
 					dentistDetailsArray[i].addAddress(addAddress);
-					
 					break;
 				}
 			
@@ -735,7 +671,7 @@ public class DentistPractice {
 	
 	public static void changePatientDetails() throws FileNotFoundException {
 		
-		loadPatientDetails();
+	
 		
 		String checkFirstName = globalPatientFirstName;
 		String checkLastName = globalPatientLastName;
@@ -773,17 +709,16 @@ public class DentistPractice {
 				PatientDetailsArray[i].addPassword(newPassword);
 				PatientDetailsArray[i].addAddress(newAddress); 
 				PatientDetailsArray[i].changeFirstDentist(newFirstDentist); 
-				
 				break;
 			}
 		
 		}
-		savePatientDetails();
+		
 	}
 	
 	public static void changeDentistDetails() throws FileNotFoundException {
 		
-		loadDentistDetails();
+		
 		
 		String checkFirstName = globalDentistFirstName;
 		String checkLastName = globalDentistLastName;
@@ -816,12 +751,11 @@ public class DentistPractice {
 				dentistDetailsArray[i].addLastName(newLastName);
 				dentistDetailsArray[i].addPassword(newPassword);
 				dentistDetailsArray[i].addAddress(newAddress);
-				
 				break;
 			}
 		
 		}
-		savePatientDetails();
+		
 	}
 	
 	private static void PreviousVists() {
