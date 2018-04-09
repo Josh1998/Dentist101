@@ -12,7 +12,7 @@ public class DentistPracticeSystem {
 		 
 		final static PatientDetailsA[] PatientDetailsArray = new PatientDetailsA[5];
 		final static DentistDetailsA[] dentistDetailsArray = new DentistDetailsA[3];
-		private static patientTreatments[] treatments = new patientTreatments[25];
+		final static patientTreatments[] treatments = new patientTreatments[25];
 		private static final String ListOfAppointments = "D://Dentist//AppointmentList.txt";
 		private static final Scanner userInput = new Scanner(System.in);
 		private static int caesarCipher = 3; 
@@ -259,7 +259,7 @@ public class DentistPracticeSystem {
 						break;
 					}
 					case "2" : {
-						//viewCalendar();
+						viewAllAppointments();
 						break;
 					}
 					case "3" : {
@@ -377,8 +377,6 @@ public class DentistPracticeSystem {
 			
 			Scanner PatientDetails = new Scanner(new FileReader("D:\\Dentist\\PatientDetails.txt"));
 			
-			
-			
 			String addPatient = "0";
 			String addFirstName = "free";
 			String addLastName = "free";
@@ -440,7 +438,10 @@ public class DentistPracticeSystem {
 			System.out.println("Please enter password:");
 			String passwordRemove = input.next();
 			
+			System.out.println("Please enter Patient ID:");
+			String patientIDRemove = input.next();
 			String remove = "free";
+			
 			
 			for (int i = 0; i<PatientDetailsArray.length; i++)
 			{
@@ -455,8 +456,23 @@ public class DentistPracticeSystem {
 					break;
 				}
 			}
+			
+			for (int i = 0; i<treatments.length; i++)
+			{
+				if ((treatments[i].getPatientID().equals(patientIDRemove)))
+				{
+					treatments[i].removePatientID(remove);
+					treatments[i].removeTreatment(remove);
+					treatments[i].removeDate(remove);
+					treatments[i].removeDentist(remove);
+					break;
+				}
+			}
+			
+			}
+			
 		}
-	}
+	
 
 		private static void AddremoveFirstChoice() throws FileNotFoundException {
 			
@@ -682,24 +698,16 @@ public class DentistPracticeSystem {
 					break;
 				}
 			}
-			
 		}
-			
-			
 	}
 
-
-		private static void listPreviousUpcomingAppointments() {
-			// TODO Auto-generated method stub
-			
-		}
 		
 		private static void addTreatmentToPatient() throws FileNotFoundException {
 			
 		Scanner file = new Scanner(new FileReader("D:\\Dentist\\Treatments.txt"));
 		
 		System.out.println("Please enter the patient's ID: ");
-		String setpatientID = input.next();
+		String setPatientID = input.next();
 		
 		System.out.println("Please enter the treatment: ");
 		String setTreatment = input.next();
@@ -712,14 +720,14 @@ public class DentistPracticeSystem {
 		String empty = "free";
 	
 		
-		for (int i = 0; i<dentistDetailsArray.length; i++)
+		for (int i = 0; i<treatments.length; i++)
 			
 		{
 			
 			if ((treatments[i].getPatientID().equals(empty))&&(treatments[i].getTreatment().equals(empty))&&(treatments[i].getDate().equals(empty))&&(treatments[i].getDentist().equals(empty)))
 			{
 				
-				treatments[i].addPatientID(setpatientID);
+				treatments[i].addPatientID(setPatientID);
 				treatments[i].addTreatment(setTreatment);
 				treatments[i].addDate(setDate);
 				treatments[i].addDentist(setDentist);
