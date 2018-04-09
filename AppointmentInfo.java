@@ -1,0 +1,102 @@
+
+public class AppointmentInfo {
+
+	private int no;
+	private String type;
+	private double price;
+	private String balcony;
+	private String ailment;
+	private String ID;
+	private String password;
+
+	// constructors must do everything as set methods are not necessary here
+	public AppointmentInfo(int no, String type, double price, String balcony, String ailment, String ID, String password) {
+		this.no = no;
+		this.type = type;
+		this.price = price;
+		this.balcony = balcony;
+		this.ailment = ailment;
+		this.ID = ID;
+		this.password = password;
+	}
+	public String toString() {
+		
+		return String.format("Appointment No:%02d  Date:%s  Time:%.2f  Dr:%s  isReserve:%s  %s",
+				no, type, price, balcony , (isReserve() ? "Y" : "N"), (isReserve() ? "ID:" + ID + "  " +"Ailment:" + ailment : "" ));
+	}
+
+		public String toSaveString() {
+			return no + " " + type + " " + price + " " + balcony + " " + ailment + " " + ID + " " + password;
+		}
+		public boolean isReserve() {
+			return ID != "" ? true : false;
+	}
+		
+	public void reserveRoom(String ailment, String ID, String password) throws Exception {
+			
+			if (!isReserve()) {
+				this.ailment = ailment;
+				this.ID = ID;
+				this.password = password;
+			}
+			else {
+				throw new Exception("Already Reserved");
+			}
+		}
+	public void cancelRoom(String ID) throws Exception {
+	if (ID.equals(this.ID)) {
+		this.ailment = "";
+		this.ID = "";
+		this.password = "";
+	}
+	else {
+		throw new Exception("No ID's Matching");
+	}
+}
+
+	public int checkMatch(String type, double price, String balcony) {
+	
+	int matching = 0;
+
+	if (this.type.equalsIgnoreCase(type)) {
+		matching++;
+	}
+
+	if (this.price <= price) {
+		matching++;
+	}
+
+	if (this.balcony.equalsIgnoreCase(balcony)) {
+		matching++;
+	}
+
+
+	return matching;
+}
+	public int getNo() {
+		return no;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public String isBalcony() {
+		return balcony;
+	}
+	public String getAilment() {
+		return ailment;
+	}
+	public String getID() {
+		return ID;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+}
+

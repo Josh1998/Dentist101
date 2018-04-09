@@ -1,0 +1,95 @@
+public class PatientDetailsA {
+	
+	String patientID;
+	String firstName;
+	String lastName;
+	String password;
+	String address;
+	String firstDentist;
+	
+
+	public PatientDetailsA(String patientID,String firstName, String lastName, String password, String address, String firstDentist) {
+		this.patientID = patientID;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.address = address;
+		this.firstDentist = firstDentist;
+	}
+	
+	public String display() {
+		String result = patientID + " " + firstName + " " + lastName;
+		return result;
+		}
+
+	public String getPatientID() {
+		return this.patientID;
+	}
+
+	public String getFirstName() {
+		return this.firstName;
+	}
+	
+	public String getLastName() {
+		return this.lastName;
+	}
+	
+	public String getPassword() {
+		return this.password;
+	}
+	
+	public String getAddress() {
+		return this.address;
+	}
+	
+	public String getFirstDentist() {
+		return this.firstDentist;
+	}
+	
+	public void addFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public void addLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	public void addPassword(String password) {
+		this.password = password;
+	}
+	
+	public void addAddress(String address) {
+		this.address = address;
+	}
+	
+	public void removeFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public void removeLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	public void removePassword(String password) {
+		this.password = password;
+	}
+	
+	public void removeAddress(String address) {
+		this.address = address;
+	}
+	
+	public void removeFirstDentist(String firstDentist) {
+		this.firstDentist = firstDentist;
+	}
+	
+	public void changeFirstDentist(String firstDentist) {
+		this.firstDentist = firstDentist;
+	}
+	
+	public String save() {
+		String finish = patientID + " " + firstName + " " + lastName + " " + password + " " + address + " " + firstDentist;
+		return finish;
+	}
+
+
+}

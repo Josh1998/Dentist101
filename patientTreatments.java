@@ -1,0 +1,83 @@
+public class patientTreatments {
+
+	String patientID;
+	String treatment;
+	String date;
+	String dentist;
+	
+		
+	
+	public patientTreatments(String patientID, String treatment, String date, String dentist)  {
+		this.patientID = patientID;
+		this.treatment = treatment;
+		this.date = date;
+		this.dentist = dentist;
+
+	}
+	public String displayTreatments() {
+	    String result = patientID + " " + treatment + " " + date + " Dr " + dentist;
+	    	return result;
+	}
+	    	
+	public String displayTreatment() {
+	    String result = patientID + " " + treatment + " " + date + " Dr " + dentist;
+	    	return result;
+	}
+	public String displayTreatmentForDentist() {
+	    String result = patientID + " " + treatment + " " + date + " Dr " + dentist;
+	    	return result;
+	}
+	public String getPatientID() {
+		return this.patientID;
+	}
+                                                                                                     
+	public String getTreatment() {
+		return this.treatment;
+	}
+	
+	public String getDate() {
+		return this.date;
+	}
+	
+	public String getDentist() {
+		return this.dentist;
+	
+}
+	public void addPatientID(String patientID) {
+		this.patientID = patientID;
+	}
+	
+	public void addTreatment(String treatment) {
+		this.treatment = treatment;
+	}
+	
+	public void addDate(String date) {
+		this.date = date;
+	}
+	
+	public void addDentist(String dentist) {
+		this.dentist = dentist;
+	}
+	
+	public void removePatientID(String patientID) {
+		this.patientID = patientID;
+	}
+	
+	public void removeTreatment(String treatment) {
+		this.treatment = treatment;
+	}
+	
+	public void removeDate(String date) {
+		this.date = date;
+	}
+	
+	public void removeDentist(String dentist) {
+		this.dentist = dentist;
+	}
+	
+	public String save() {
+		String finish = patientID + " " + treatment + " " + date + " " + dentist;
+		return finish;
+	}
+	
+}
