@@ -414,7 +414,7 @@ public class DentistPracticeSystem {
 			
 			System.out.println("Data Saved.");
 		}
-
+                //this methods is used to add and remove patients from the system
 		public static void AddremovePatient() throws FileNotFoundException {
 			
 			Scanner PatientDetails = new Scanner(new FileReader("D:\\Dentist\\PatientDetails.txt"));
@@ -431,6 +431,7 @@ public class DentistPracticeSystem {
 			
 			addPatient = input.next().toUpperCase();
 			
+			//admin selects to add or remove patient
 			if (addPatient.equals("1")) {
 				
 				String empty = "free";
@@ -438,23 +439,26 @@ public class DentistPracticeSystem {
 				System.out.println("Please remember to use the '_' instead of spaces, thank you.");
 				System.out.println(" ");
 				
-				System.out.println("Please enter first name:");
+				//collecting data for filter
+				System.out.println("Please enter new first name:");
 				addFirstName = input.next();
 				
-				System.out.println("Please enter last name:");
+				System.out.println("Please enter new last name:");
 				addLastName = input.next();
 				
 				System.out.println("Please enter new password name:");
 				addPassword = input.next();
 				
-				System.out.println("Please enter address:");
+				System.out.println("Please enter new address:");
 				addAddress = input.next();
 				
+				//this is the filter which is used to get free patient slot
 				for (int i = 0; i<PatientDetailsArray.length; i++)
 				{
 				
 					if ((PatientDetailsArray[i].getFirstName().equals(empty))&&(PatientDetailsArray[i].getLastName().equals(empty))&&(PatientDetailsArray[i].getPassword().equals(empty))&&(PatientDetailsArray[i].getAddress().equals(empty))&&(PatientDetailsArray[i].getFirstDentist().equals(empty)))
 					{
+						//new patient data
 						PatientDetailsArray[i].addFirstName(addFirstName);
 						PatientDetailsArray[i].addLastName(addLastName);
 						PatientDetailsArray[i].addPassword(addPassword);
@@ -468,9 +472,10 @@ public class DentistPracticeSystem {
 				
 			}
 			
-			
+			//removing patient
 			else {
 			
+			//data used to get patient string
 			System.out.println("Please enter first name:");
 			String firstNameRemove = input.next();
 			
@@ -485,11 +490,12 @@ public class DentistPracticeSystem {
 			String remove = "free";
 			
 			
+			//filter used to remove patient data from patientDetails.txt
 			for (int i = 0; i<PatientDetailsArray.length; i++)
 			{
 				if ((PatientDetailsArray[i].getFirstName().equals(firstNameRemove))&&(PatientDetailsArray[i].getLastName().equals(lastNameRemove))&&(PatientDetailsArray[i].getPassword().equals(passwordRemove)))
 				{
-					
+					//removes patient data from system
 					PatientDetailsArray[i].removeFirstName(remove);
 					PatientDetailsArray[i].removeLastName(remove);
 					PatientDetailsArray[i].removePassword(remove);
@@ -498,11 +504,12 @@ public class DentistPracticeSystem {
 					break;
 				}
 			}
-			
+			//filter used to remove patient data from treatments.txt
 			for (int i = 0; i<treatments.length; i++)
 			{
 				if ((treatments[i].getPatientID().equals(patientIDRemove)))
 				{
+					//removes data from treatments.txt
 					treatments[i].removePatientID(remove);
 					treatments[i].removeTreatment(remove);
 					treatments[i].removeDate(remove);
@@ -515,7 +522,7 @@ public class DentistPracticeSystem {
 			
 		}
 	
-
+ 
 		private static void AddremoveFirstChoice() throws FileNotFoundException {
 			
 
