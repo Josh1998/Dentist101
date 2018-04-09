@@ -771,6 +771,7 @@ public class DentistPracticeSystem {
 			
 		Scanner file = new Scanner(new FileReader("D:\\Dentist\\Treatments.txt"));
 		
+		//inputs data to add to array
 		System.out.println("Please enter the patient's ID: ");
 		String setPatientID = input.next();
 		
@@ -784,14 +785,14 @@ public class DentistPracticeSystem {
 		
 		String empty = "free";
 	
-		
+		//finds free space on treatments.txt
 		for (int i = 0; i<treatments.length; i++)
 			
 		{
 			
 			if ((treatments[i].getPatientID().equals(empty))&&(treatments[i].getTreatment().equals(empty))&&(treatments[i].getDate().equals(empty))&&(treatments[i].getDentist().equals(empty)))
 			{
-				
+				//changes free space to new treatment data
 				treatments[i].addPatientID(setPatientID);
 				treatments[i].addTreatment(setTreatment);
 				treatments[i].addDate(setDate);
@@ -800,7 +801,7 @@ public class DentistPracticeSystem {
 			}
 		}
 	}
-
+                //used to display treatment array for dentist
 		public static void displayTreatmentForDentist() throws FileNotFoundException {
 			
 			
@@ -808,11 +809,11 @@ public class DentistPracticeSystem {
 			
 			Scanner file = new Scanner(new FileReader("D:\\Dentist\\Treatments.txt"));
 			
-			
+			//used to find specific dentists treatments in treatment.txt
 			for (int i = 0; i<treatments.length; i++)
 				
 			{
-				
+				//displays specific dentists treatments
 				if ((treatments[i].getDentist().equals(checkDentistLastName)))
 				{
 					System.out.println("");
@@ -822,11 +823,11 @@ public class DentistPracticeSystem {
 				}
 			}
 		}
-				
+		//used for patients to change their own details in patient details array		
 		public static void changePatientDetails() throws FileNotFoundException {
 			
 		
-			
+			//enters login data into local variables for filter
 			String checkFirstName = globalPatientFirstName;
 			String checkLastName = globalPatientLastName;
 			String checkPassword = globalPatientPassword;
@@ -836,6 +837,7 @@ public class DentistPracticeSystem {
 			System.out.println("Please remember to use the '_' instead of spaces, thank you.");
 			System.out.println(" ");
 			
+			//patient inputs new data
 			System.out.println("Please enter new first name:");
 			String newFirstName = input.next();
 			
@@ -851,10 +853,10 @@ public class DentistPracticeSystem {
 			System.out.println("Please enter new First Choice Dentist:");
 			String newFirstDentist = input.next();
 			
-			
+			//finds specific patient details in patientDetailsArray
 			for (int i = 0; i<PatientDetailsArray.length; i++)
 			{
-			
+			        //changes old data to new information
 				if ((PatientDetailsArray[i].getPatientID().equals(checkPatientID))&&(PatientDetailsArray[i].getFirstName().equals(checkFirstName))&&(PatientDetailsArray[i].getLastName().equals(checkLastName))&&(PatientDetailsArray[i].getPassword().equals(checkPassword)))
 				{
 					
@@ -869,11 +871,11 @@ public class DentistPracticeSystem {
 			}
 			
 		}
-		
+		//changes dentist details
 		public static void changeDentistDetails() throws FileNotFoundException {
 			
 			
-			
+			//enters login data into local variables for filter
 			String checkFirstName = globalDentistFirstName;
 			String checkLastName = globalDentistLastName;
 			String checkPassword = globalDentistPassword;
@@ -883,6 +885,7 @@ public class DentistPracticeSystem {
 			System.out.println("Please remember to use the '_' instead of spaces, thank you.");
 			System.out.println(" ");
 			
+			//dentist inputs new data
 			System.out.println("Please enter new first name:");
 			String newFirstName = input.next();
 			
@@ -895,9 +898,10 @@ public class DentistPracticeSystem {
 			System.out.println("Please enter new address:");
 			String newAddress = input.next();
 			
+			//finds specific dentist details in dentistDetailsArray
 			for (int i = 0; i<PatientDetailsArray.length; i++)
 			{
-			
+			        //changes old data to new information
 				if ((dentistDetailsArray[i].getDentistID().equals(checkPatientID))&&(dentistDetailsArray[i].getFirstName().equals(checkFirstName))&&(dentistDetailsArray[i].getLastName().equals(checkLastName))&&(dentistDetailsArray[i].getPassword().equals(checkPassword)))
 				{
 					
@@ -935,16 +939,19 @@ public class DentistPracticeSystem {
 				}
 			}	
 		}
+		//displays treatments for patients
 		public static void displayTreatment() throws FileNotFoundException {
 			treatmentList();
 				
+				//uses login data into local variable 
 				String checkPatientID = globalPatientID;
 				
 				Scanner file = new Scanner(new FileReader("D:\\Dentist\\Treatments.txt"));
 				
+				//finds patient info in treatments array
 				for (int i = 0; i<treatments.length; i++)
 				{
-								
+								//displays all data corresponding to that patient ID
 								if ((treatments[i].getPatientID().equals(checkPatientID)))
 								{
 									System.out.println("");
