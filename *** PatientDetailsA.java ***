@@ -7,7 +7,7 @@ public class PatientDetailsA {
 	String address;
 	String firstDentist;
 	
-
+	//This is the constructor for the patientDetailsArray.
 	public PatientDetailsA(String patientID,String firstName, String lastName, String password, String address, String firstDentist) {
 		this.patientID = patientID;
 		this.firstName = firstName;
@@ -16,12 +16,12 @@ public class PatientDetailsA {
 		this.address = address;
 		this.firstDentist = firstDentist;
 	}
-	
+	//This displays the patient log in information.
 	public String display() {
 		String result = patientID + " " + firstName + " " + lastName;
 		return result;
 		}
-
+	//The 'get' objects are used within the filters on the source code to get specific Strings from the patientDetailsArray.
 	public String getPatientID() {
 		return this.patientID;
 	}
@@ -46,6 +46,7 @@ public class PatientDetailsA {
 		return this.firstDentist;
 	}
 	
+	//The 'add' objects are used once the Arrays have been filtered to add data inputted such as adding a patient to the system.
 	public void addFirstName(String firstName) {
 		this.firstName = firstName;
 	}
@@ -62,6 +63,7 @@ public class PatientDetailsA {
 		this.address = address;
 	}
 	
+	//The 'remove' objects are used when removing data from the system and replacing it with the 'free' placeholder in the text files.
 	public void removeFirstName(String firstName) {
 		this.firstName = firstName;
 	}
@@ -82,10 +84,12 @@ public class PatientDetailsA {
 		this.firstDentist = firstDentist;
 	}
 	
+	//This is used to change or add the firstDentist variable 
 	public void changeFirstDentist(String firstDentist) {
 		this.firstDentist = firstDentist;
 	}
 	
+	//This is used to write the data stored in the patientDetailsArray to the text file.
 	public String save() {
 		String finish = patientID + " " + firstName + " " + lastName + " " + password + " " + address + " " + firstDentist;
 		return finish;
