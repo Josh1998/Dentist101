@@ -6,7 +6,7 @@ public class patientTreatments {
 	String dentist;
 	
 		
-	
+	//This is the contructor used for the treatments array.
 	public patientTreatments(String patientID, String treatment, String date, String dentist)  {
 		this.patientID = patientID;
 		this.treatment = treatment;
@@ -14,19 +14,26 @@ public class patientTreatments {
 		this.dentist = dentist;
 
 	}
+	
+	//This displays the treatments for the admin
 	public String displayTreatments() {
 	    String result = patientID + " " + treatment + " " + date + " Dr " + dentist;
 	    	return result;
 	}
-	    	
+	 
+	 //This displays the specific treatments for the patient
 	public String displayTreatment() {
 	    String result = patientID + " " + treatment + " " + date + " Dr " + dentist;
 	    	return result;
 	}
+	
+	//This displays the treatments for the dentist
 	public String displayTreatmentForDentist() {
 	    String result = patientID + " " + treatment + " " + date + " Dr " + dentist;
 	    	return result;
 	}
+	
+	//This is used for the filters that require the treatments array
 	public String getPatientID() {
 		return this.patientID;
 	}
@@ -42,7 +49,9 @@ public class patientTreatments {
 	public String getDentist() {
 		return this.dentist;
 	
-}
+	}
+	
+	//This is used to add tratments to the list
 	public void addPatientID(String patientID) {
 		this.patientID = patientID;
 	}
@@ -59,10 +68,11 @@ public class patientTreatments {
 		this.dentist = dentist;
 	}
 	
+	//This is used to remove data from the list
 	public void removePatientID(String patientID) {
 		this.patientID = patientID;
 	}
-	
+
 	public void removeTreatment(String treatment) {
 		this.treatment = treatment;
 	}
@@ -75,6 +85,7 @@ public class patientTreatments {
 		this.dentist = dentist;
 	}
 	
+	//This is used to save the data from treatments array to the text file
 	public String save() {
 		String finish = patientID + " " + treatment + " " + date + " " + dentist;
 		return finish;
