@@ -522,13 +522,14 @@ public class DentistPracticeSystem {
 			
 		}
 	
- 
+                //method used to add and remove first choice dentist
 		private static void AddremoveFirstChoice() throws FileNotFoundException {
 			
 
 			
 			String change = "free";
 			
+			//admin inputs data used for filter
 			System.out.println("Please enter first name:");
 			String FirstName = input.next();
 			
@@ -544,15 +545,18 @@ public class DentistPracticeSystem {
 			
 			String addFirstChoice = input.next().toUpperCase();
 			
+			//if adding first choice
 			if (addFirstChoice.equals("1")) {
 			
 				for (int i = 0; i<PatientDetailsArray.length; i++)
 				{
-				
+				//filter used to remove patient data from array 
 					if ((PatientDetailsArray[i].getFirstName().equals(FirstName))&&(PatientDetailsArray[i].getLastName().equals(LastName))&&(PatientDetailsArray[i].getPassword().equals(Password)))
 					{
+						//admin inputs new first choice dentist
 						System.out.println("Please enter your First Choice dentist's:");
 						String FirstDentist = input.next();
+						//changes first choice dentist
 						PatientDetailsArray[i].changeFirstDentist(FirstDentist);
 						break;
 					}
@@ -560,14 +564,17 @@ public class DentistPracticeSystem {
 				}
 			}
 			
+			//used for removing first choice dentist
 			else {
 				
+				//used to filter info
 				for (int i = 0; i<PatientDetailsArray.length; i++)
 				{
 				
 					if ((PatientDetailsArray[i].getFirstName().equals(FirstName))&&(PatientDetailsArray[i].getLastName().equals(LastName))&&(PatientDetailsArray[i].getPassword().equals(Password)))
 					{
 						
+						//used to overwrite variable to free
 						PatientDetailsArray[i].changeFirstDentist(change);
 						break;
 					}
