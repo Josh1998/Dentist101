@@ -1,3 +1,4 @@
+//Imports
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -7,41 +8,51 @@ import java.io.PrintWriter;
 
 public class DentistPracticeSystem {
 
+		//This is where we declared our multiple scanners
 		static final Scanner Menu = new Scanner(System.in);
 		private static Scanner input = new Scanner(System.in);
+		private static Scanner group = new Scanner(System.in);
+		private static final Scanner userInput = new Scanner(System.in);
 		 
+		//These are the arrays we have used to collect data in text files
 		final static PatientDetailsA[] PatientDetailsArray = new PatientDetailsA[5];
 		final static DentistDetailsA[] dentistDetailsArray = new DentistDetailsA[3];
 		final static patientTreatments[] treatments = new patientTreatments[25];
-		private static final String ListOfAppointments = "D://Dentist//AppointmentList.txt";
-		private static final Scanner userInput = new Scanner(System.in);
-		private static int caesarCipher = 3; 
-		private static final HashMap<Integer, AppointmentInfo> appointments = new HashMap<Integer, AppointmentInfo>();
-		private static Scanner group = new Scanner(System.in);
 		
+		//We used a HashMap for the request system as it was more suited than an array
+		private static final HashMap<Integer, AppointmentInfo> appointments = new HashMap<Integer, AppointmentInfo>();
+		private static final String ListOfAppointments = "D://Dentist//AppointmentList.txt";
+		
+		//This is where we declared the key for our ceasar cipher encryption
+		private static int caesarCipher = 3; 
 		 
-		 	static String globalPatientID = "notFilledIn";
+		 	//These are used for secure authentication 
+			static String globalPatientID = "notFilledIn";
 		 	static String globalPatientFirstName = "notFilledIn";
 			static String globalPatientLastName = "notFilledIn";
 			static String globalPatientPassword = "notFilledIn";
 			
+			//These are used for secure authentication
 			static String globalDentistID = "notFilledIn";
 		 	static String globalDentistFirstName = "notFilledIn";
 			static String globalDentistLastName = "notFilledIn";
 			static String globalDentistPassword = "notFilledIn";
 	
 		public static void main(String[] args) throws Exception {
-			loadAppointmentData();
-
+			
+			//This is our main menu system where the user chooses their role in the practice
 			String choice = "";
 
 			System.out.println("-- Welcome to the Dentists --");
 			System.out.println(" ");
 			
+			//This loads the arrays
+			loadAppointmentData();
 			loadPatientDetails();
 			loadDentistDetails();
 			treatmentList();
 
+			//This is the login main menu
 			do {
 				System.out.println("1 - Admin");
 				System.out.println("2 - Dentist");
@@ -71,6 +82,7 @@ public class DentistPracticeSystem {
 				}
 			} while (!choice.equals("Q"));
 			
+			//Writes arrays to text files once program exits
 			savePatientDetails();
 			saveDentistDetails();
 			saveData();
@@ -79,10 +91,12 @@ public class DentistPracticeSystem {
 			
 	}
 
+		//This is the patient login methods
 		public static void Patient() throws FileNotFoundException {
 			
 			Scanner PatientDetails = new Scanner(new FileReader("D:\\Dentist\\PatientDetails.txt"));
 			
+				//User enters login info
 				System.out.println("Please input your patientID:");
 				String logInPatientID = input.next();
 				System.out.println("Please input your first name:");
@@ -92,11 +106,13 @@ public class DentistPracticeSystem {
 				System.out.println("Please input your password:");
 				String logInPassword = input.next();
 				
+				//This filter identifies users data
 				for (int i = 0; i<PatientDetailsArray.length; i++)
 				{
 					
 					if ((PatientDetailsArray[i].getPatientID().equals(logInPatientID))&&(PatientDetailsArray[i].getFirstName().equals(logInFirstName))&&(PatientDetailsArray[i].getLastName().equals(logInLastName))&&(PatientDetailsArray[i].getPassword().equals(logInPassword)))
 					{
+						//Enters users data into global variables
 						System.out.println("Your chosen account is:");
 						System.out.println(PatientDetailsArray[i].display());
 						globalPatientID = logInPatientID;
@@ -107,19 +123,23 @@ public class DentistPracticeSystem {
 					}
 				}
 				
+				//If login wrong sends back to main menu
 				if (globalPatientPassword.equals("notFilledIn")) {
 					 System.out.println("Your username or password is incorrect");
 					
 				}
+				//If correct sends to patient sub-menu
 				else { System.out.println("Successfully logged in");
 					patientSubMenu();
 				}	
 		}
 		
+		//This is the dentist login system
 		private static void Dentist() throws FileNotFoundException {
 			
 			Scanner dentistDetails = new Scanner(new FileReader("D:\\Dentist\\dentistDetails.txt"));
 				
+				//Dentist enters login info
 				System.out.println("Please input your DentistID:");
 				String logInDentistID = input.next();
 				System.out.println("Please input your first name:");
@@ -129,9 +149,11 @@ public class DentistPracticeSystem {
 				System.out.println("Please input your password:");
 				String logInPassword = input.next();
 				
+				//Identifies dentist data
 				for (int i = 0; i<PatientDetailsArray.length; i++)
 				{
 					
+					//Enters dentist data into global variables
 					if ((dentistDetailsArray[i].getDentistID().equals(logInDentistID))&&(dentistDetailsArray[i].getFirstName().equals(logInFirstName))&&(dentistDetailsArray[i].getLastName().equals(logInLastName))&&(dentistDetailsArray[i].getPassword().equals(logInPassword)))
 					{
 						System.out.println("Your chosen account is:");
@@ -144,30 +166,36 @@ public class DentistPracticeSystem {
 					}
 				}
 				
+				//If wrong sends back to main menu
 				if (globalDentistPassword.equals("notFilledIn")) {
 					 System.out.println("Your username or password is incorrect");
 					
 				}
+				//If correct sends to sub-menu
 				else { System.out.println("Successfully logged in");
 					dentistSubMenu();
 				}
 		}
-		
+		//Admin login method
 		private static void Admin() throws FileNotFoundException {
 			Scanner admin = new Scanner(System.in);
 			
+			//Gets 3 attempts to login
 			for(int i=0; i<3; i++) {
 			
+				//Admin enters login data
 				System.out.println("Please input username");
 				String usernameA = admin.next();
 				System.out.println("Please input password");
 				String passwordA = admin.next();
 				
+				//If correct goes to admin sub-menu
 				if (usernameA.equals("Admin")&&passwordA.equals("password")) {
 					adminSubMenu();
 					break;
 					
 				}
+				//If incorect continues for loop
 				else { System.out.println("Your username or password is incorrect, please try again");
 				
 				}
@@ -177,13 +205,15 @@ public class DentistPracticeSystem {
 			
 		}
 		
-		
+		//This is the sub-menu for patients
 		private static void patientSubMenu() throws FileNotFoundException {
 			
 			 final Scanner P = new Scanner(System.in);
 			 
+			 //Holds patient answer
 			 String patientChoice = "";
 		
+			//shows list of functions to patient
 			do {
 				System.out.println("1 - Add/change your personal details");
 				System.out.println("2 - Previous visits to the practice");
@@ -197,6 +227,7 @@ public class DentistPracticeSystem {
 
 				patientChoice = P.next().toUpperCase();
 
+				//used to take patient to different methods
 				switch (patientChoice) {
 					case "1" : {
 						changePatientDetails();
@@ -231,15 +262,17 @@ public class DentistPracticeSystem {
 						break;
 					}
 				}
+			//returns to login main menu
 			} while (!patientChoice.equals("R"));
 
 			
 			
 		}
-		
+		//dentist sub-menu
 		private static void dentistSubMenu() throws FileNotFoundException {
 			final Scanner D = new Scanner(System.in);
 			
+			//holds dentist info
 			String choice = "";
 			
 			do {
@@ -253,6 +286,7 @@ public class DentistPracticeSystem {
 
 				choice = D.next().toUpperCase();
 
+				//takes dentist to different methods
 				switch (choice) {
 					case "1" : {
 						changeDentistDetails();
@@ -276,16 +310,19 @@ public class DentistPracticeSystem {
 					}
 
 				}
+			//returns to main menu
 			} while (!choice.equals("R"));
 			
 		}
 		
-
+                //admin sub-menu
 		private static void adminSubMenu() throws FileNotFoundException {
 
 			final Scanner A = new Scanner(System.in);
 			
+			//holds admin info
 			String choice = "";
+			
 			
 			do {
 				System.out.println("1 - Add/remove dentist");
@@ -300,6 +337,7 @@ public class DentistPracticeSystem {
 
 				choice = A.next().toUpperCase();
 
+				//takes admin to different methods
 				switch (choice) {
 					case "1" : {
 						AddremoveDentist();
@@ -330,11 +368,12 @@ public class DentistPracticeSystem {
 						break;
 					}
 				}
+			//returns to main menu
 			} while (!choice.equals("R"));
 			
 		}
 			
-			
+		//this method inputs data from patientDetails.txt to patientDetailsArray 	
 		public static void loadPatientDetails() throws FileNotFoundException {
 			
 			Scanner PatientDetails = new Scanner(new FileReader("D:\\Dentist\\PatientDetails.txt"));
@@ -342,6 +381,7 @@ public class DentistPracticeSystem {
 			
 			int amount = 0;
 			
+			//inputs data into array
 			while(PatientDetails.hasNext()) {
 				
 				String patientID = PatientDetails.next();
@@ -357,6 +397,7 @@ public class DentistPracticeSystem {
 			}
 		}
 		
+		//inputs data from patientDetails array into patientDetails.txt
 		public static void savePatientDetails() throws FileNotFoundException {
 			
 			Scanner PatientDetails = new Scanner(new FileReader("D:\\Dentist\\PatientDetails.txt"));
@@ -364,6 +405,7 @@ public class DentistPracticeSystem {
 			
 			PrintWriter save = new PrintWriter("D:\\Dentist\\PatientDetails.txt");
 
+			//writes patientDetails array to patientDetails.txt
 			for (int i=0; i<PatientDetailsArray.length ; i++)
 			  {
 			     save.println(PatientDetailsArray[i].save());
