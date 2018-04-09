@@ -607,13 +607,14 @@ public class DentistPracticeSystem {
 			// TODO Auto-generated method stub
 			
 		}
-
+                //methods used to fill treatments array from treatments.txt
 		private static void treatmentList() throws FileNotFoundException {
 			
 			
 			Scanner file = new Scanner(new FileReader("D:\\Dentist\\Treatments.txt"));
 			int statement = 0;
 		
+			//inputs data into treatments array
 			while (file.hasNext()) {
 				String patientID = file.next();
 				String treatment = file.next();
@@ -625,9 +626,10 @@ public class DentistPracticeSystem {
 			}
 			file.close();
 		}
-		
+		//methods used display all the treatments 
 		private static void displayTreatments() throws FileNotFoundException {
 			treatmentList();
+			//cycles through array displaying strings
 			for (int i=0; i<treatments.length; i++) { 
 				
 				System.out.println("");
@@ -635,7 +637,7 @@ public class DentistPracticeSystem {
 				
 			}
 		}
-		
+		//this method inputs data from dentistDetails.txt to dentistDetailsArray
 		public static void loadDentistDetails() throws FileNotFoundException {
 		
 			Scanner dentistDetails = new Scanner(new FileReader("D:\\Dentist\\DentistDetails.txt"));
@@ -643,6 +645,7 @@ public class DentistPracticeSystem {
 			
 			int amount = 0;
 			
+			//inputs data into array
 			while(dentistDetails.hasNext()) {
 				
 				String dentistID = dentistDetails.next();
@@ -657,12 +660,13 @@ public class DentistPracticeSystem {
 				
 			}
 		}
-		
+		//writes data from dentistDetailsArray to dentistDetails.txt
 		public static void saveDentistDetails() throws FileNotFoundException {
 			
 
 			PrintWriter save = new PrintWriter("D:\\Dentist\\DentistDetails.txt");
 
+			//writes array to text file
 			for (int i=0; i<dentistDetailsArray.length ; i++)
 			  {
 			     save.println(dentistDetailsArray[i].save());
@@ -671,7 +675,7 @@ public class DentistPracticeSystem {
 			
 			
 		}
-
+                //used to add or remove dentists
 		private static void AddremoveDentist() throws FileNotFoundException {
 			
 			
@@ -688,6 +692,7 @@ public class DentistPracticeSystem {
 			
 			addDentist = input.next().toUpperCase();
 			
+			//adding dentists
 			if (addDentist.equals("1")) {
 				
 				String empty = "free";
@@ -695,6 +700,7 @@ public class DentistPracticeSystem {
 				System.out.println("Please remember to use the '_' instead of spaces, thank you.");
 				System.out.println(" ");
 				
+				//input data for filter
 				System.out.println("Please enter first name:");
 				addFirstName = input.next();
 				
@@ -707,12 +713,13 @@ public class DentistPracticeSystem {
 				System.out.println("Please enter address:");
 				addAddress = input.next();
 				
+				//used to find a free space in dentistDetils.txt
 				for (int i = 0; i<dentistDetailsArray.length; i++)
 				{
 				
 					if ((dentistDetailsArray[i].getFirstName().equals(empty))&&(dentistDetailsArray[i].getLastName().equals(empty))&&(dentistDetailsArray[i].getPassword().equals(empty)))
 					{
-						
+						//replaces placeholders with new dentist data
 						dentistDetailsArray[i].addFirstName(addFirstName);
 						dentistDetailsArray[i].addLastName(addLastName);
 						dentistDetailsArray[i].addPassword(addPassword);
@@ -726,11 +733,11 @@ public class DentistPracticeSystem {
 				
 			}
 			
-			
+			//removing dentist
 			else {
 			
 			
-			
+			//admin inputs data for filter
 			System.out.println("Please enter first name:");
 			String firstNameRemove = input.next();
 			
@@ -742,11 +749,13 @@ public class DentistPracticeSystem {
 			
 			String remove = "free";
 			
+			//filter to find specific dentist string
 			for (int i = 0; i<dentistDetailsArray.length; i++)
 			{
 				if ((dentistDetailsArray[i].getFirstName().equals(firstNameRemove))&&(dentistDetailsArray[i].getLastName().equals(lastNameRemove))&&(dentistDetailsArray[i].getPassword().equals(passwordRemove)))
 				{
 					
+					//changes dentist data with "free" placeholder
 					dentistDetailsArray[i].removeFirstName(remove);
 					dentistDetailsArray[i].removeLastName(remove);
 					dentistDetailsArray[i].removePassword(remove);
@@ -757,7 +766,7 @@ public class DentistPracticeSystem {
 		}
 	}
 
-		
+		//method used to add treatments to patient
 		private static void addTreatmentToPatient() throws FileNotFoundException {
 			
 		Scanner file = new Scanner(new FileReader("D:\\Dentist\\Treatments.txt"));
