@@ -277,8 +277,8 @@ public class DentistPracticeSystem {
 			
 			do {
 				System.out.println("1 - Add/change personal details");
-				System.out.println("2 - View calendar");
-				System.out.println("3 - List previous appointments");
+				System.out.println("2 - View calendar for every booked appointment");
+				System.out.println("3 - List previous/upcoming appointments");
 				System.out.println("4 - Add treatment to a patient");
 				System.out.println("5 - List Treatments Given");
 				System.out.println("R - Return to main menu");
@@ -320,24 +320,20 @@ public class DentistPracticeSystem {
 
 			final Scanner A = new Scanner(System.in);
 			
-			//holds admin info
 			String choice = "";
-			
 			
 			do {
 				System.out.println("1 - Add/remove dentist");
 				System.out.println("2 - Add/remove patient");
 				System.out.println("3 - Add/change first choice dentist");
-				System.out.println("4 - Alter working days");
-				System.out.println("5 - List upcoming appointments");
-				System.out.println("6 - List previous visits made");
-				System.out.println("7 - List treatments made");
+				System.out.println("4 - List previous/upcoming appointments [Dentist Filter]");
+				System.out.println("5 - List previous/upcoming appointments [Patient Filter]");
+				System.out.println("6 - List treatments made");
 				System.out.println("R - Return to main menu");
 				System.out.print("Pick : ");
 
 				choice = A.next().toUpperCase();
 
-				//takes admin to different methods
 				switch (choice) {
 					case "1" : {
 						AddremoveDentist();
@@ -352,18 +348,14 @@ public class DentistPracticeSystem {
 						break;
 					}
 					case "4" : {
-						//();
-						break;
-					}
-					case "5" : {
 						ListAppointments();
 						break;
 					}
-					case "6" : {
-						ListPreviousUpcomingVisits();
+					case "5" : {
+						ListPreviousUpcomingVisitsP();
 						break;
 					}
-					case "7" : {
+					case "6" : {
 						displayTreatments();
 						break;
 					}
@@ -603,10 +595,25 @@ public class DentistPracticeSystem {
 			}
 		}
 
-		private static void ListPreviousUpcomingVisits() {
-			// TODO Auto-generated method stub
+		private static void ListPreviousUpcomingVisitsP() {
 			
-		}
+				System.out.print("Patient ID : ");
+				String ID = userInput.next();
+
+				System.out.println("");
+				System.out.println("-- " + ID + " PREVIOUS/UPCOMING APPOINTMENTS LIST --");
+
+				boolean isThereAppointments = false;
+
+				for (AppointmentInfo appointment : appointments.values()) {
+					if (appointment.isReserve()) {
+						if ((ID.equals(appointment.getID()))) {
+							System.out.println(appointment.toString());
+							isThereAppointments = true;
+							System.out.println("");
+						}
+					}}}
+					
                 //methods used to fill treatments array from treatments.txt
 		private static void treatmentList() throws FileNotFoundException {
 			
