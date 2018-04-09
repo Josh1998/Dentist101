@@ -922,7 +922,7 @@ public class DentistPracticeSystem {
 			}
 			
 		}
-		
+		//option for patients to view their appointments 
 		private static void PreviousVists() {
 			
 			System.out.print("ID : ");
@@ -933,13 +933,19 @@ public class DentistPracticeSystem {
 			
 			System.out.println("");
 			System.out.println("-- " + ID + " PREVIOUS/UPCOMING APPOINTMENTS LIST --");
-
+			
+			//sets appointments to false until requirements are met
 			boolean isThereAppointments = false;
-
+			
+			//searches the appointments list to see if the ID and Password have previously been used
+			
 			for (AppointmentInfo appointment : appointments.values()) {
 				if (appointment.isReserve()) {
 					if ((ID.equals(appointment.getID())&&(password.equals(appointment.getPassword())))) {
 						System.out.println(appointment.toString());
+						
+						//if the ID and password match then the filter will display all appointments relevant
+						
 						isThereAppointments = true;
 						System.out.println("");
 					}
@@ -970,11 +976,12 @@ public class DentistPracticeSystem {
 		}
 			
 		
-		
+		//Displays all appointments whether booked or not
 		private static void viewAllAppointments() {
 			for (AppointmentInfo appointment : appointments.values())
 				System.out.println(appointment.toString());
 		}
+		//loads the data from the text file
 		private static void loadAppointmentData() throws Exception {
 			Scanner userInput;
 			
@@ -985,6 +992,7 @@ public class DentistPracticeSystem {
 			String decrypt = "";
 			char fileSecurity;
 			
+			//text file is pre-encrypted so this code decrypts it so it is visible
 			while (userInput.hasNext()) {
 				
 				information = userInput.nextLine();
@@ -1008,11 +1016,15 @@ public class DentistPracticeSystem {
 			userInput.close();
 		}
 		
+		
 		private static void reserveRoom() {
 			System.out.println("-- AVAILABLE ROOMS --");
-
+		
+		//sets appointments to false until requirements are met
 					boolean isThereAppointments = false;
-
+		
+		//Pulls up all the Appoints that haven't been booked  
+		
 					for (AppointmentInfo appointment : appointments.values()) {
 						if (!appointment.isReserve()) {
 							System.out.println(appointment.toString());
@@ -1022,6 +1034,8 @@ public class DentistPracticeSystem {
 
 					aquireRoom(isThereAppointments);
 				}
+				
+		//allows the user to search for an appointment based on parameters 
 		private static void searchRoom() {
 			System.out.println("-- SEARCH FOR AN APPOINTMENT --");
 
@@ -1036,11 +1050,13 @@ public class DentistPracticeSystem {
 			System.out.print("Please enter first choice dentist [Surname] : ");
 			String balcony = userInput.next();
 			
+			// if 3 parameters are met then it equals a match, if 1 or less match then it will not match 
 				for (int match = 3; match >= 1; match--) {
 					isThereAppointments = false;
 
 				System.out.println("Showing Appointments Matching " + match + " Requirements !");
-
+			
+			//checks the appoints to see if any of the appointments match the users parameters
 				for (AppointmentInfo appointment : appointments.values()) {
 					if (!appointment.isReserve()) {
 						if (appointment.checkMatch(type, price, balcony) == match) {
@@ -1061,6 +1077,7 @@ public class DentistPracticeSystem {
 			aquireRoom(isThereAppointments);
 		}
 		
+		//Method allows user to decide what appointment they want to choose
 		private static void aquireRoom(boolean isThereAppointments) {
 			if (isThereAppointments) {
 				System.out.print("Reserve Appointment No : ");
@@ -1089,21 +1106,25 @@ public class DentistPracticeSystem {
 				
 				System.out.print("password : ");
 				String password = userInput.next();
-
+				
+		//if all credentials are entered correctly and appointment is booked then display a message telling the user 
 				try {
 					
 					appointments.get(no).reserveRoom(ailment, ID, password);
 
-					System.out.println("Victory !");
+					System.out.println("Appointment has been booked");
 				}
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 				}
 			}
 			else {
+			
+			//display if there are no appointments available
 				System.out.println("No Appointments are available at this time");
 			}
 		}
+		//method that allows user to cancel their appointment 
 		private static void cancelRoom() {
 			System.out.print("What was your ailment? [1:Toothache, 2:Accident, 3:Bleeding, 4:Over-Sensitive, 5:Other] ");
 			String ailment = userInput.next();
@@ -1132,7 +1153,7 @@ public class DentistPracticeSystem {
 			System.out.println("-- " + ID + " RESERVE APPOINTMENTS --");
 
 			boolean isThereAppointments = false;
-
+	//if there is an appointment that matches what the user has inputted then it will display it and give the option to cancel it
 			for (AppointmentInfo appointment : appointments.values()) {
 				if (appointment.isReserve()) {
 					if ((ailment.equals(appointment.getAilment()))&&(ID.equals(appointment.getID())&&(password.equals(appointment.getPassword())))) {
@@ -1144,7 +1165,7 @@ public class DentistPracticeSystem {
 			if (isThereAppointments) {
 				System.out.print("Cancel Appointment No : ");
 				int no = userInput.nextInt();
-
+	//Once appointment has been chosen it removes the users details from the text file
 				try {
 					
 					appointments.get(no).cancelRoom(ID);
