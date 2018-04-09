@@ -1,0 +1,73 @@
+public class = DentistDetailsA
+
+String patientID
+String firstName
+String lastName
+String password
+String address
+String firstDentist
+
+public PatientDetailsA (constructor):
+
+this.dentistID = dentistID
+this.firstName = firstName
+this.lastName = lastName
+this.password = password
+this.address = address
+this.firstDentist = firstDentist
+
+public String display (patient log in info)
+String result = patientID + firstName + lastName
+return result
+
+public String getPatientID
+return
+
+public String getFirstName
+return
+
+public String getLastName
+return
+
+public String getPassword
+return
+
+public String getAddress
+return
+
+public String getFirstDentist
+return this.firstDentist
+
+public void addFirstName
+this.firstName = firstName
+
+public void addLastName
+this.lastName = lastName
+
+public void addPassword
+this.password = password
+
+public void addAddress
+this.address = address
+
+public void removeFirstName
+this.firstName = firstName
+
+public void removeLastName
+this.lastName = lastName
+
+public void removePassword
+this.password = password
+
+public void removeAddress
+this.address = address
+
+public void removeFirstDentist
+this.firstDentist = firstDentist
+
+public void changeFirstDentist
+this.firstDentist = firstDentist
+
+public String save
+String finish = patientID + firstName + lastName + password + address + firstDentist
+return finish
