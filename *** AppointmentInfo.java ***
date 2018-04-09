@@ -56,6 +56,7 @@ public class AppointmentInfo {
 	}
 }
 
+//check for a match in the appointments list
 	public int checkMatch(String type, double price, String balcony) {
 	
 	int matching = 0;
@@ -75,6 +76,7 @@ public class AppointmentInfo {
 
 	return matching;
 }
+//The 'get' objects are used within the filters on the source code to get specific Strings from the appointments Array.
 	public int getNo() {
 		return no;
 	}
