@@ -1,20 +1,19 @@
-
 public class AppointmentInfo {
 
-	private int no;
-	private String type;
-	private double price;
-	private String balcony;
+	private int appNo;
+	private String date;
+	private double time;
+	private String dentist;
 	private String ailment;
 	private String ID;
 	private String password;
 
 	//This is the constructor for the appointment array.
-	public AppointmentInfo(int no, String type, double price, String balcony, String ailment, String ID, String password) {
-		this.no = no;
-		this.type = type;
-		this.price = price;
-		this.balcony = balcony;
+	public AppointmentInfo(int appNo, String date, double time, String dentist, String ailment, String ID, String password) {
+		this.appNo = appNo;
+		this.date = date;
+		this.time = time;
+		this.dentist = dentist;
 		this.ailment = ailment;
 		this.ID = ID;
 		this.password = password;
@@ -23,20 +22,20 @@ public class AppointmentInfo {
 	public String toString() {
 		
 		return String.format("Appointment No:%02d  Date:%s  Time:%.2f  Dr:%s  isReserve:%s  %s",
-				no, type, price, balcony , (isReserve() ? "Y" : "N"), (isReserve() ? "ID:" + ID + "  " +"Ailment:" + ailment : "" ));
+				appNo, date, time, dentist , (isAppointmentBooked() ? "Y" : "N"), (isAppointmentBooked() ? "ID:" + ID + "  " +"Ailment:" + ailment : "" ));
 	}
 
 		public String toSaveString() {
-			return no + " " + type + " " + price + " " + balcony + " " + ailment + " " + ID + " " + password;
+			return appNo + " " + date + " " + time + " " + dentist + " " + ailment + " " + ID + " " + password;
 		}
 		//if booked show ID
-		public boolean isReserve() {
+		public boolean isAppointmentBooked() {
 			return ID != "" ? true : false;
 	}
 		
-	public void reserveRoom(String ailment, String ID, String password) throws Exception {
+	public void bookAppointment(String ailment, String ID, String password) throws Exception {
 			
-			if (!isReserve()) {
+			if (!isAppointmentBooked()) {
 				this.ailment = ailment;
 				this.ID = ID;
 				this.password = password;
@@ -45,7 +44,7 @@ public class AppointmentInfo {
 				throw new Exception("Already Reserved");
 			}
 		}
-	public void cancelRoom(String ID) throws Exception {
+	public void cancelAppointment(String ID) throws Exception {
 	if (ID.equals(this.ID)) {
 		this.ailment = "";
 		this.ID = "";
@@ -57,19 +56,19 @@ public class AppointmentInfo {
 }
 
 //check for a match in the appointments list
-	public int checkMatch(String type, double price, String balcony) {
+	public int checkForMatchingAppointments(String type, double price, String balcony) {
 	
 	int matching = 0;
 
-	if (this.type.equalsIgnoreCase(type)) {
+	if (this.date.equalsIgnoreCase(date)) {
 		matching++;
 	}
 
-	if (this.price <= price) {
+	if (this.time <= time) {
 		matching++;
 	}
 
-	if (this.balcony.equalsIgnoreCase(balcony)) {
+	if (this.dentist.equalsIgnoreCase(dentist)) {
 		matching++;
 	}
 
@@ -78,19 +77,19 @@ public class AppointmentInfo {
 }
 //The 'get' objects are used within the filters on the source code to get specific Strings from the appointments Array.
 	public int getNo() {
-		return no;
+		return appNo;
 	}
 
-	public String getType() {
-		return type;
+	public String getDate() {
+		return date;
 	}
 
-	public double getPrice() {
-		return price;
+	public double getTime() {
+		return time;
 	}
 
-	public String isBalcony() {
-		return balcony;
+	public String isDentist() {
+		return dentist;
 	}
 	public String getAilment() {
 		return ailment;
@@ -103,4 +102,3 @@ public class AppointmentInfo {
 		return password;
 	}
 }
-
