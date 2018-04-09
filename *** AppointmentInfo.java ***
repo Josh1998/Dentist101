@@ -9,7 +9,7 @@ public class AppointmentInfo {
 	private String ID;
 	private String password;
 
-	// constructors must do everything as set methods are not necessary here
+	//This is the constructor for the appointment array.
 	public AppointmentInfo(int no, String type, double price, String balcony, String ailment, String ID, String password) {
 		this.no = no;
 		this.type = type;
@@ -19,6 +19,7 @@ public class AppointmentInfo {
 		this.ID = ID;
 		this.password = password;
 	}
+	//This displays the appointment information
 	public String toString() {
 		
 		return String.format("Appointment No:%02d  Date:%s  Time:%.2f  Dr:%s  isReserve:%s  %s",
@@ -28,6 +29,7 @@ public class AppointmentInfo {
 		public String toSaveString() {
 			return no + " " + type + " " + price + " " + balcony + " " + ailment + " " + ID + " " + password;
 		}
+		//if booked show ID
 		public boolean isReserve() {
 			return ID != "" ? true : false;
 	}
